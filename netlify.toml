@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/api/*"
+  to = "http://vms.makonissoft.com:1919/:splat"
+  status = 200
+  force = true
