@@ -262,7 +262,7 @@ const Login = () => {
               >
                 New on our platform?
                 <strong style={{ marginLeft: 10 }}>
-                  <Link to="register">Create account</Link>
+                  <Link to="/Register">Create account</Link>
                 </strong>
               </p>
             </div>

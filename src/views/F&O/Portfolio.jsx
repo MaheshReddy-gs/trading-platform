@@ -33,7 +33,7 @@ function Portfolio() {
   // Error Message start
   const dispatch = useDispatch();
   const brokerState = useSelector((state) => state.brokerReducer);
-  const [msgs, setMsgs] = useState([]);
+  const [ msgs, setMsgs ] = useState([]);
   const handleClearLogs = () => {
     if (msgs.length === 0) return; //guard clause
     setMsgs([]);
@@ -42,36 +42,36 @@ function Portfolio() {
   // portfolio table
   const mainUser = cookies.get("USERNAME");
 
-  const [editingRow, setEditingRow] = useState(null);
-  const [MakeCopy, setMakeCopy] = useState(null);
-  const [MakeAsCompleted, setMakeAsCompleted] = useState(null);
-  const [Reset, setReset] = useState(null);
-  const [PayOff, setPayOff] = useState(null);
-  const [Chart, setChart] = useState(null);
-  const [Reexecute, setReexecute] = useState(null);
-  const [PartEntry, setPartEntry] = useState(null);
+  const [ editingRow, setEditingRow ] = useState(null);
+  const [ MakeCopy, setMakeCopy ] = useState(null);
+  const [ MakeAsCompleted, setMakeAsCompleted ] = useState(null);
+  const [ Reset, setReset ] = useState(null);
+  const [ PayOff, setPayOff ] = useState(null);
+  const [ Chart, setChart ] = useState(null);
+  const [ Reexecute, setReexecute ] = useState(null);
+  const [ PartEntry, setPartEntry ] = useState(null);
   const navigate = useNavigate();
 
   const handleMsg = (Msg) => {
-    const lastMsg = consoleMsgs[0];
+    const lastMsg = consoleMsgs[ 0 ];
     if (Msg.logType === "MESSAGE" || Msg.logType === "ERROR") {
       if (lastMsg && lastMsg.msg === Msg.msg && lastMsg.user === Msg.user) {
         dispatch(
           setConsoleMsgs({
-            consoleMsgs: [Msg, ...consoleMsgs.slice(1)],
+            consoleMsgs: [ Msg, ...consoleMsgs.slice(1) ],
           }),
         );
       } else {
         dispatch(
           setConsoleMsgs({
-            consoleMsgs: [Msg, ...consoleMsgs],
+            consoleMsgs: [ Msg, ...consoleMsgs ],
           }),
         );
       }
     } else {
       dispatch(
         setConsoleMsgs({
-          consoleMsgs: [Msg, ...consoleMsgs],
+          consoleMsgs: [ Msg, ...consoleMsgs ],
         }),
       );
     }
@@ -106,8 +106,8 @@ function Portfolio() {
       setShowConfirmDeleteModal(false);
     }
   };
-  const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
-  const [portfolioToDelete, setPortfolioToDelete] = useState("");
+  const [ showConfirmDeleteModal, setShowConfirmDeleteModal ] = useState(false);
+  const [ portfolioToDelete, setPortfolioToDelete ] = useState("");
   const handleDelete = (portfolioName) => {
     // Show a confirmation modal before actually deleting
     setShowConfirmDeleteModal(true);
@@ -116,17 +116,17 @@ function Portfolio() {
     setPortfolioToDelete(portfolioName);
   };
 
-  const [timerValue, setTimerValue] = useState("");
-  const [isTableOpen, setTableOpen] = useState(false);
-  const [isTableOpen1, setTableOpen1] = useState(false);
-  const [isPlusClicked, setIsPlusClicked] = useState({});
-  const [isPlusClicked1, setIsPlusClicked1] = useState({});
-  const [subTableData, setsubTableData] = useState([]);
-  const [showPortfolio, setShowPortfolio] = useState(false);
-  const [otherDetails, setotherDetails] = useState([]);
+  const [ timerValue, setTimerValue ] = useState("");
+  const [ isTableOpen, setTableOpen ] = useState(false);
+  const [ isTableOpen1, setTableOpen1 ] = useState(false);
+  const [ isPlusClicked, setIsPlusClicked ] = useState({});
+  const [ isPlusClicked1, setIsPlusClicked1 ] = useState({});
+  const [ subTableData, setsubTableData ] = useState([]);
+  const [ showPortfolio, setShowPortfolio ] = useState(false);
+  const [ otherDetails, setotherDetails ] = useState([]);
   useEffect(() => {
     setotherDetails(brokerState.brokers);
-  }, [brokerState.brokers]);
+  }, [ brokerState.brokers ]);
 
   const { portfolios: portfolioDetails } = useSelector(
     (state) => state.portfolioReducer,
@@ -157,8 +157,8 @@ function Portfolio() {
         };
       }
       const responseData = await responsePortfolioData.json();
-      console.log("responseData", responseData);
-      const extractedPortfolio = responseData["Portfolio details"];
+      // console.log("responseData", responseData);
+      const extractedPortfolio = responseData[ "Portfolio details" ];
       // console.log("extractedPortfolio", extractedPortfolio);
 
       dispatch(
@@ -210,45 +210,45 @@ function Portfolio() {
   const handlePlusClick = async (index) => {
     const plusState = { ...isPlusClicked };
     Object.keys(plusState).forEach((key) => {
-      plusState[key] = false;
+      plusState[ key ] = false;
     });
-    plusState[index] = !isPlusClicked[index];
+    plusState[ index ] = !isPlusClicked[ index ];
     // console.log("otherDetails", otherDetails);
     setTableOpen(Object.values(plusState).includes(true));
     setIsPlusClicked(plusState);
-    const brokerIds = portfolioDetails[index].Strategy_accounts_id.split(",");
+    const brokerIds = portfolioDetails[ index ].Strategy_accounts_id.split(",");
     // console.log("brokerIds", brokerIds);
     // console.log("otherDetails", otherDetails);
     const brokerDetails = otherDetails.filter((broker) =>
       brokerIds.includes(broker.userId),
     );
     // console.log("brokerDetails", brokerDetails);
-    setsubTableData([{ ...portfolioDetails[index], brokerDetails }]);
+    setsubTableData([ { ...portfolioDetails[ index ], brokerDetails } ]);
   };
   useEffect(() => {
     setsubTableData((prev) => ({
       ...prev,
       otherDetails: otherDetails,
     }));
-  }, [otherDetails]);
+  }, [ otherDetails ]);
   useState(() => {
     const newBoolObject = {};
     if (subTableData.length !== 0) {
-      subTableData[0].Strategy_accounts_id.split(",").forEach((_, index) => {
+      subTableData[ 0 ].Strategy_accounts_id.split(",").forEach((_, index) => {
         const newBoolObject = {};
-        newBoolObject[index] = false;
+        newBoolObject[ index ] = false;
       });
       setIsPlusClicked1(newBoolObject);
     }
-  }, [subTableData]);
+  }, [ subTableData ]);
 
   useState(() => {
     const newBoolObject = {};
     portfolioDetails.forEach((_, index) => {
-      newBoolObject[index] = false;
+      newBoolObject[ index ] = false;
     });
     setIsPlusClicked(newBoolObject);
-  }, [portfolioDetails]);
+  }, [ portfolioDetails ]);
 
   useEffect(() => {
     const getUserDetails = async () => {
@@ -274,9 +274,9 @@ function Portfolio() {
   const handlePlusClick1 = (index) => {
     const plusState = { ...isPlusClicked1 };
     Object.keys(plusState).forEach((key) => {
-      plusState[key] = false;
+      plusState[ key ] = false;
     });
-    plusState[index] = !isPlusClicked1[index];
+    plusState[ index ] = !isPlusClicked1[ index ];
     setTableOpen1(Object.values(plusState).includes(true));
     setIsPlusClicked1(plusState);
   };
@@ -292,7 +292,7 @@ function Portfolio() {
   const handleEdit = (editablePortfolio) => {
     setEditingRow(editablePortfolio);
     const params = JSON.stringify(editablePortfolio);
-    console.log("string params", params);
+    // console.log("string params", params);
     navigate(`/Edit-Portfolio/${params}`, editablePortfolio);
   };
   useEffect(() => {
@@ -342,7 +342,7 @@ function Portfolio() {
       //   },
       // ]);
     }
-  }, [portfolioDetails]);
+  }, [ portfolioDetails ]);
 
   const allSeqState = useSelector((state) => state.allSeqReducer);
   const allVisState = useSelector((state) => state.allVisReducer);
@@ -383,23 +383,23 @@ function Portfolio() {
     "Message",
   ];
 
-  const [colVisPortfolio, setcolVisPortfolio] = useState(
+  const [ colVisPortfolio, setcolVisPortfolio ] = useState(
     allVisState.portfolioVis,
   );
 
-  const [portfolioColsSelectedALL, setportfolioColsSelectedALL] =
+  const [ portfolioColsSelectedALL, setportfolioColsSelectedALL ] =
     useState(false);
   const portfolioColSelectALL = () => {
     setportfolioColsSelectedALL((prev) => !prev);
     portfolioCols.map((portfolioCol) => {
       setcolVisPortfolio((prev) => ({
         ...prev,
-        [portfolioCol]: portfolioColsSelectedALL,
+        [ portfolioCol ]: portfolioColsSelectedALL,
       }));
     });
   };
 
-  const [portfolioSeq, setportfolioSeq] = useState(allSeqState.portfolioSeq);
+  const [ portfolioSeq, setportfolioSeq ] = useState(allSeqState.portfolioSeq);
 
   useEffect(() => {
     setportfolioSeq(allSeqState.strategiesSeq);
@@ -407,9 +407,9 @@ function Portfolio() {
       const colVis = {};
       Object.keys(colVisPortfolio).map((col) => {
         if (allSeqState.portfolioSeq.includes(col)) {
-          colVis[col] = true;
+          colVis[ col ] = true;
         } else {
-          colVis[col] = false;
+          colVis[ col ] = false;
         }
       });
       // console.log("{...prev, ...colVis}", {...prev, ...colVis})
@@ -431,7 +431,7 @@ function Portfolio() {
         setportfolioSeq([]);
       }
     }
-  }, [colVisPortfolio]);
+  }, [ colVisPortfolio ]);
 
   useEffect(() => {
     // console.log("userProfSeq", userProfSeq)
@@ -441,9 +441,9 @@ function Portfolio() {
         portfolioSeq: portfolioSeq,
       }),
     );
-  }, [portfolioSeq]);
+  }, [ portfolioSeq ]);
 
-  const [showSearchPortfolio, setshowSearchPortfolio] = useState({
+  const [ showSearchPortfolio, setshowSearchPortfolio ] = useState({
     showSearchPortfolioName: false,
     showSearchSymbol: false,
     showSearchProduct: false,
@@ -451,43 +451,43 @@ function Portfolio() {
   });
 
   const handleCloseAllSearchBox = (e) => {
-    const allowedElements = ["th img", ".Filter-popup"];
+    const allowedElements = [ "th img", ".Filter-popup" ];
     if (!allowedElements.some((element) => e.target.closest(element))) {
       // The click was outside of the allowed elements, perform your function here
       setshowSearchPortfolio((prev) =>
         Object.fromEntries(
-          Object.entries(prev).map(([key, value]) => [key, false]),
+          Object.entries(prev).map(([ key, value ]) => [ key, false ]),
         ),
       );
     }
   };
 
-  const [selectAllPortfolioName, setSelectAllPortfolioName] = useState(false);
-  const [uniquePortfolioName, setuniquePortfolioName] = useState([]);
-  const [portfolioNameSelected, setPortfolioNameSelected] = useState([]);
+  const [ selectAllPortfolioName, setSelectAllPortfolioName ] = useState(false);
+  const [ uniquePortfolioName, setuniquePortfolioName ] = useState([]);
+  const [ portfolioNameSelected, setPortfolioNameSelected ] = useState([]);
 
-  const [selectAllSymbol, setSelectAllSymbol] = useState(false);
-  const [uniqueSymbol, setuniqueSymbol] = useState([]);
-  const [SymbolSelected, setSymbolSelected] = useState([]);
+  const [ selectAllSymbol, setSelectAllSymbol ] = useState(false);
+  const [ uniqueSymbol, setuniqueSymbol ] = useState([]);
+  const [ SymbolSelected, setSymbolSelected ] = useState([]);
 
-  const [selectAllProduct, setSelectAllProduct] = useState(false);
-  const [uniqueProduct, setuniqueProduct] = useState([]);
-  const [ProductSelected, setProductSelected] = useState([]);
+  const [ selectAllProduct, setSelectAllProduct ] = useState(false);
+  const [ uniqueProduct, setuniqueProduct ] = useState([]);
+  const [ ProductSelected, setProductSelected ] = useState([]);
 
-  const [selectAllStrategy, setSelectAllStrategy] = useState(false);
-  const [uniqueStrategy, setuniqueStrategy] = useState([]);
-  const [StrategySelected, setStrategySelected] = useState([]);
+  const [ selectAllStrategy, setSelectAllStrategy ] = useState(false);
+  const [ uniqueStrategy, setuniqueStrategy ] = useState([]);
+  const [ StrategySelected, setStrategySelected ] = useState([]);
 
   useEffect(() => {
     const data = portfolioDetails;
 
     setuniquePortfolioName(
-      data ? [...new Set(data.map((d) => d.portfolio_name))] : [],
+      data ? [ ...new Set(data.map((d) => d.portfolio_name)) ] : [],
     );
-    setuniqueSymbol(data ? [...new Set(data.map((d) => d.stock_symbol))] : []);
-    setuniqueProduct(data ? [...new Set(data.map((d) => d.variety))] : []);
-    setuniqueStrategy(data ? [...new Set(data.map((d) => d.strategy))] : []);
-  }, [portfolioDetails]);
+    setuniqueSymbol(data ? [ ...new Set(data.map((d) => d.stock_symbol)) ] : []);
+    setuniqueProduct(data ? [ ...new Set(data.map((d) => d.variety)) ] : []);
+    setuniqueStrategy(data ? [ ...new Set(data.map((d) => d.strategy)) ] : []);
+  }, [ portfolioDetails ]);
 
   const handleCheckboxChangePortfolioName = (portfolioName) => {
     const isSelected = portfolioNameSelected.includes(portfolioName);
@@ -523,7 +523,7 @@ function Portfolio() {
       setSymbolSelected(SymbolSelected.filter((item) => item !== Symbol));
       setSelectAllSymbol(false);
     } else {
-      setSymbolSelected((prevSelected) => [...prevSelected, Symbol]);
+      setSymbolSelected((prevSelected) => [ ...prevSelected, Symbol ]);
       setSelectAllSymbol(SymbolSelected.length === uniqueSymbol.length - 1);
     }
   };
@@ -544,7 +544,7 @@ function Portfolio() {
       setStrategySelected(StrategySelected.filter((item) => item !== Strategy));
       setSelectAllStrategy(false);
     } else {
-      setStrategySelected((prevSelected) => [...prevSelected, Strategy]);
+      setStrategySelected((prevSelected) => [ ...prevSelected, Strategy ]);
       setSelectAllStrategy(
         StrategySelected.length === uniqueStrategy.length - 1,
       );
@@ -567,7 +567,7 @@ function Portfolio() {
       setProductSelected(ProductSelected.filter((item) => item !== Product));
       setSelectAllProduct(false);
     } else {
-      setProductSelected((prevSelected) => [...prevSelected, Product]);
+      setProductSelected((prevSelected) => [ ...prevSelected, Product ]);
       setSelectAllProduct(ProductSelected.length === uniqueProduct.length - 1);
     }
   };
@@ -611,7 +611,7 @@ function Portfolio() {
     });
     setshowSearchPortfolio((prev) =>
       Object.fromEntries(
-        Object.entries(prev).map(([key, value]) => [key, false]),
+        Object.entries(prev).map(([ key, value ]) => [ key, false ]),
       ),
     );
   };
@@ -644,33 +644,33 @@ function Portfolio() {
     const rows = portfolioDetails;
     let prevfilteredRows;
     if (portfolioNameSelected.length !== 0) {
-      console.log("portfolioNameSelected", portfolioNameSelected);
+      // console.log("portfolioNameSelected", portfolioNameSelected);
       prevfilteredRows = rows.filter((row) =>
         portfolioNameSelected.includes(row.portfolio_name.toLowerCase()),
       );
     } else {
       prevfilteredRows = rows;
     }
-    console.log("prevfilteredRows  portfolioNameSelected", prevfilteredRows);
+    // console.log("prevfilteredRows  portfolioNameSelected", prevfilteredRows);
     if (SymbolSelected.length !== 0) {
       prevfilteredRows = prevfilteredRows.filter((row) =>
         SymbolSelected.includes(row.stock_symbol.toLowerCase()),
       );
     }
-    console.log("prevfilteredRows  SymbolSelected", prevfilteredRows);
+    // console.log("prevfilteredRows  SymbolSelected", prevfilteredRows);
     if (ProductSelected.length !== 0) {
       prevfilteredRows = prevfilteredRows.filter((row) =>
         ProductSelected.includes(row.variety.toLowerCase()),
       );
     }
-    console.log("prevfilteredRows  ProductSelected", prevfilteredRows);
+    // console.log("prevfilteredRows  ProductSelected", prevfilteredRows);
     if (StrategySelected.length !== 0) {
-      console.log("pStrategySelected", StrategySelected);
+      // console.log("pStrategySelected", StrategySelected);
       prevfilteredRows = prevfilteredRows.filter((row) =>
         StrategySelected.includes(row.strategy.toLowerCase()),
       );
     }
-    console.log("prevfilteredRows  StrategySelected", prevfilteredRows);
+    // console.log("prevfilteredRows  StrategySelected", prevfilteredRows);
 
     setuniquePortfolioName(() => {
       return Array.from(
@@ -720,7 +720,7 @@ function Portfolio() {
   };
 
   const portfolioTH = {
-    Enabled: colVisPortfolio["Enabled"] && (
+    Enabled: colVisPortfolio[ "Enabled" ] && (
       <th colspan="2">
         <div>
           <small>Enabled</small>
@@ -731,9 +731,9 @@ function Portfolio() {
               height: "25px",
               width: "25px",
             }}
-            // onClick={() => {
-            //   setShowSelectBox((prev) => !prev);
-            // }}
+          // onClick={() => {
+          //   setShowSelectBox((prev) => !prev);
+          // }}
           />
         </div>
         {/* {showSelectBox && (
@@ -756,7 +756,7 @@ function Portfolio() {
         )} */}
       </th>
     ),
-    Status: colVisPortfolio["Status"] && (
+    Status: colVisPortfolio[ "Status" ] && (
       <th>
         <div>
           <small>Status</small>
@@ -772,7 +772,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    "Portfolio Name": colVisPortfolio["Portfolio Name"] && (
+    "Portfolio Name": colVisPortfolio[ "Portfolio Name" ] && (
       <th>
         <div>
           <small>Portfolio Name</small>
@@ -842,7 +842,7 @@ function Portfolio() {
                 onClick={() => {
                   setshowSearchPortfolio((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key]) => [key, false]),
+                      Object.entries(prev).map(([ key ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -854,7 +854,7 @@ function Portfolio() {
         )}
       </th>
     ),
-    PNL: colVisPortfolio["PNL"] && (
+    PNL: colVisPortfolio[ "PNL" ] && (
       <th>
         <div>
           <small>PNL</small>
@@ -911,7 +911,7 @@ function Portfolio() {
         )} */}
       </th>
     ),
-    Symbol: colVisPortfolio["Symbol"] && (
+    Symbol: colVisPortfolio[ "Symbol" ] && (
       <th>
         <div>
           <small>Symbol</small>
@@ -979,7 +979,7 @@ function Portfolio() {
                 onClick={() => {
                   setshowSearchPortfolio((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key]) => [key, false]),
+                      Object.entries(prev).map(([ key ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -991,70 +991,70 @@ function Portfolio() {
         )}
       </th>
     ),
-    "Execute/Sq Off": colVisPortfolio["Execute/Sq Off"] && (
+    "Execute/Sq Off": colVisPortfolio[ "Execute/Sq Off" ] && (
       <th>
         <div>
           <small>Execute/Sq Off</small>
         </div>
       </th>
     ),
-    Delete: colVisPortfolio["Delete"] && (
+    Delete: colVisPortfolio[ "Delete" ] && (
       <th>
         <div>
           <small>Delete</small>
         </div>
       </th>
     ),
-    Edit: colVisPortfolio["Edit"] && (
+    Edit: colVisPortfolio[ "Edit" ] && (
       <th>
         <div>
           <small>Edit</small>
         </div>
       </th>
     ),
-    "Make Copy": colVisPortfolio["Make Copy"] && (
+    "Make Copy": colVisPortfolio[ "Make Copy" ] && (
       <th>
         <div>
           <small>Make Copy</small>
         </div>
       </th>
     ),
-    "Mark As Completed": colVisPortfolio["Mark As Completed"] && (
+    "Mark As Completed": colVisPortfolio[ "Mark As Completed" ] && (
       <th>
         <div>
           <small>Mark As Completed</small>
         </div>
       </th>
     ),
-    Reset: colVisPortfolio["Reset"] && (
+    Reset: colVisPortfolio[ "Reset" ] && (
       <th>
         <div>
           <small>Reset</small>
         </div>
       </th>
     ),
-    "Pay Off": colVisPortfolio["Pay Off"] && (
+    "Pay Off": colVisPortfolio[ "Pay Off" ] && (
       <th>
         <div>
           <small>Pay Off</small>
         </div>
       </th>
     ),
-    Chat: colVisPortfolio["Chat"] && (
+    Chat: colVisPortfolio[ "Chat" ] && (
       <th>
         <div>
           <small>Chat</small>
         </div>
       </th>
     ),
-    "Re Execute": colVisPortfolio["Re Execute"] && (
+    "Re Execute": colVisPortfolio[ "Re Execute" ] && (
       <th>
         <div>
           <small>Re Execute</small>
         </div>
       </th>
     ),
-    "Part Entry/Exit": colVisPortfolio["Part Entry/Exit"] && (
+    "Part Entry/Exit": colVisPortfolio[ "Part Entry/Exit" ] && (
       <th>
         <div>
           <small>Part Entry/Exit</small>
@@ -1104,7 +1104,7 @@ function Portfolio() {
         )} */}
       </th>
     ),
-    "Current Value": colVisPortfolio["Current Value"] && (
+    "Current Value": colVisPortfolio[ "Current Value" ] && (
       <th>
         <div>
           <small>Current Value</small>
@@ -1120,7 +1120,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    "Value Per Lot": colVisPortfolio["Value Per Lot"] && (
+    "Value Per Lot": colVisPortfolio[ "Value Per Lot" ] && (
       <th>
         <div>
           <small>Value Per Lot</small>
@@ -1136,7 +1136,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    "Underlying LTP": colVisPortfolio["Underlying LTP"] && (
+    "Underlying LTP": colVisPortfolio[ "Underlying LTP" ] && (
       <th>
         <div>
           <small>Underlying LTP</small>
@@ -1151,7 +1151,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    "Positional Portfolio": colVisPortfolio["Positional Portfolio"] && (
+    "Positional Portfolio": colVisPortfolio[ "Positional Portfolio" ] && (
       <th>
         <div>
           <small>Positional Portfolio</small>
@@ -1209,7 +1209,7 @@ function Portfolio() {
         )} */}
       </th>
     ),
-    Product: colVisPortfolio["Product"] && (
+    Product: colVisPortfolio[ "Product" ] && (
       <th>
         <div>
           <small>Product</small>
@@ -1280,7 +1280,7 @@ function Portfolio() {
         )}
       </th>
     ),
-    Strategy: colVisPortfolio["Strategy"] && (
+    Strategy: colVisPortfolio[ "Strategy" ] && (
       <th>
         <div>
           <small>Strategy</small>
@@ -1350,7 +1350,7 @@ function Portfolio() {
         )}
       </th>
     ),
-    "Entry Price": colVisPortfolio["Entry Price"] && (
+    "Entry Price": colVisPortfolio[ "Entry Price" ] && (
       <th>
         <div>
           <small>Entry Price</small>
@@ -1418,7 +1418,7 @@ function Portfolio() {
         )} */}
       </th>
     ),
-    "Combined Premuim": colVisPortfolio["Combined Premuim"] && (
+    "Combined Premuim": colVisPortfolio[ "Combined Premuim" ] && (
       <th>
         <div>
           <small>Combined Premuim</small>
@@ -1433,7 +1433,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    "Per Lot Premuim": colVisPortfolio["Per Lot Premuim"] && (
+    "Per Lot Premuim": colVisPortfolio[ "Per Lot Premuim" ] && (
       <th>
         <div>
           <small>Per Lot Premuim</small>
@@ -1451,7 +1451,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    "Start Time": colVisPortfolio["Start Time"] && (
+    "Start Time": colVisPortfolio[ "Start Time" ] && (
       <th>
         <div>
           <small>Start Time</small>
@@ -1470,7 +1470,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    "End Time": colVisPortfolio["End Time"] && (
+    "End Time": colVisPortfolio[ "End Time" ] && (
       <th>
         <div>
           <small>End Time</small>
@@ -1489,7 +1489,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    "SqOff Time": colVisPortfolio["SqOff Time"] && (
+    "SqOff Time": colVisPortfolio[ "SqOff Time" ] && (
       <th>
         <div>
           <small>SqOff Time</small>
@@ -1508,7 +1508,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    "Range End Time": colVisPortfolio["Range End Time"] && (
+    "Range End Time": colVisPortfolio[ "Range End Time" ] && (
       <th>
         <div>
           <small>Range End Time</small>
@@ -1527,7 +1527,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    Delta: colVisPortfolio["Delta"] && (
+    Delta: colVisPortfolio[ "Delta" ] && (
       <th>
         <div>
           <small>Delta</small>
@@ -1546,7 +1546,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    Theta: colVisPortfolio["Theta"] && (
+    Theta: colVisPortfolio[ "Theta" ] && (
       <th>
         <div>
           <small>Theta</small>
@@ -1565,7 +1565,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    Vega: colVisPortfolio["Vega"] && (
+    Vega: colVisPortfolio[ "Vega" ] && (
       <th>
         <div>
           <small>Vega</small>
@@ -1581,7 +1581,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    Remarks: colVisPortfolio["Remarks"] && (
+    Remarks: colVisPortfolio[ "Remarks" ] && (
       <th>
         <div>
           <small>Remarks</small>
@@ -1597,7 +1597,7 @@ function Portfolio() {
         </div>
       </th>
     ),
-    Message: colVisPortfolio["Message"] && (
+    Message: colVisPortfolio[ "Message" ] && (
       <th>
         <div>
           <small>Message</small>
@@ -1636,14 +1636,14 @@ function Portfolio() {
           />
           <div
             className="main-table"
-            // ref={tableRef}
+          // ref={tableRef}
           >
             <table className="table">
               <thead style={{ position: "sticky", top: "0px", zIndex: 10 }}>
                 {portfolioSeq.map((colName, index) => {
                   return (
                     <React.Fragment key={index}>
-                      {portfolioTH[colName]}
+                      {portfolioTH[ colName ]}
                     </React.Fragment>
                   );
                 })}
@@ -1654,7 +1654,7 @@ function Portfolio() {
               >
                 {portfolioDetails.map((item, index) => {
                   const portfolioTD = {
-                    Enabled: colVisPortfolio["Enabled"] && (
+                    Enabled: colVisPortfolio[ "Enabled" ] && (
                       <td
                         style={{
                           width: "15%",
@@ -1664,7 +1664,7 @@ function Portfolio() {
                         colSpan="2"
                       >
                         {index !== undefined &&
-                          (!isPlusClicked[index] ? (
+                          (!isPlusClicked[ index ] ? (
                             <span
                               style={{
                                 fontSize: "30px",
@@ -1696,7 +1696,7 @@ function Portfolio() {
                         <input type="checkbox" />
                       </td>
                     ),
-                    Status: colVisPortfolio["Status"] && (
+                    Status: colVisPortfolio[ "Status" ] && (
                       <td>
                         <input
                           type="text"
@@ -1707,7 +1707,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "Portfolio Name": colVisPortfolio["Portfolio Name"] && (
+                    "Portfolio Name": colVisPortfolio[ "Portfolio Name" ] && (
                       <td>
                         <input
                           type="text"
@@ -1719,7 +1719,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    PNL: colVisPortfolio["PNL"] && (
+                    PNL: colVisPortfolio[ "PNL" ] && (
                       <td>
                         <input
                           type="number"
@@ -1737,7 +1737,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    Symbol: colVisPortfolio["Symbol"] && (
+                    Symbol: colVisPortfolio[ "Symbol" ] && (
                       <td>
                         <input
                           type="text"
@@ -1749,7 +1749,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "Execute/Sq Off": colVisPortfolio["Execute/Sq Off"] && (
+                    "Execute/Sq Off": colVisPortfolio[ "Execute/Sq Off" ] && (
                       <td style={{ textAlign: "center" }}>
                         <span className="tooltip-container">
                           <img
@@ -1760,7 +1760,7 @@ function Portfolio() {
                               height: "20px",
                               width: "20px",
                             }}
-                            // onClick={handleDelete}
+                          // onClick={handleDelete}
                           />
                           <span className="tooltiptext delete-tooltip">
                             Sq Off
@@ -1768,7 +1768,7 @@ function Portfolio() {
                         </span>
                       </td>
                     ),
-                    Delete: colVisPortfolio["Delete"] && (
+                    Delete: colVisPortfolio[ "Delete" ] && (
                       <td style={{ textAlign: "center" }}>
                         <span className="tooltip-container">
                           <img
@@ -1789,7 +1789,7 @@ function Portfolio() {
                         </span>
                       </td>
                     ),
-                    Edit: colVisPortfolio["Edit"] && (
+                    Edit: colVisPortfolio[ "Edit" ] && (
                       <td style={{ textAlign: "center" }}>
                         <span className="tooltip-container">
                           <img
@@ -1810,7 +1810,7 @@ function Portfolio() {
                       </td>
                     ),
 
-                    "Make Copy": colVisPortfolio["Make Copy"] && (
+                    "Make Copy": colVisPortfolio[ "Make Copy" ] && (
                       <td style={{ textAlign: "center" }}>
                         <span className="tooltip-container">
                           <img
@@ -1831,27 +1831,27 @@ function Portfolio() {
                     "Mark As Completed": colVisPortfolio[
                       "Mark As Completed"
                     ] && (
-                      <td style={{ textAlign: "center" }}>
-                        <span className="tooltip-container">
-                          <img
-                            src={makeascompleted}
-                            alt="icon"
-                            style={{
-                              height: "25px",
-                              width: "25px",
-                            }}
-                            onClick={handleMakeAsCompleted}
-                          />
-                          <button
-                            className="tooltiptext delete-tooltip"
-                            style={{ width: "9.2rem" }}
-                          >
-                            Make As Completed
-                          </button>
-                        </span>
-                      </td>
-                    ),
-                    Reset: colVisPortfolio["Reset"] && (
+                        <td style={{ textAlign: "center" }}>
+                          <span className="tooltip-container">
+                            <img
+                              src={makeascompleted}
+                              alt="icon"
+                              style={{
+                                height: "25px",
+                                width: "25px",
+                              }}
+                              onClick={handleMakeAsCompleted}
+                            />
+                            <button
+                              className="tooltiptext delete-tooltip"
+                              style={{ width: "9.2rem" }}
+                            >
+                              Make As Completed
+                            </button>
+                          </span>
+                        </td>
+                      ),
+                    Reset: colVisPortfolio[ "Reset" ] && (
                       <td style={{ textAlign: "center" }}>
                         <span className="tooltip-container">
                           <img
@@ -1869,7 +1869,7 @@ function Portfolio() {
                         </span>
                       </td>
                     ),
-                    "Pay Off": colVisPortfolio["Pay Off"] && (
+                    "Pay Off": colVisPortfolio[ "Pay Off" ] && (
                       <td style={{ textAlign: "center" }}>
                         <span className="tooltip-container">
                           <img
@@ -1887,7 +1887,7 @@ function Portfolio() {
                         </span>
                       </td>
                     ),
-                    Chat: colVisPortfolio["Chat"] && (
+                    Chat: colVisPortfolio[ "Chat" ] && (
                       <td style={{ textAlign: "center" }}>
                         <span className="tooltip-container">
                           <img
@@ -1905,7 +1905,7 @@ function Portfolio() {
                         </span>
                       </td>
                     ),
-                    "Re Execute": colVisPortfolio["Re Execute"] && (
+                    "Re Execute": colVisPortfolio[ "Re Execute" ] && (
                       <td style={{ textAlign: "center" }}>
                         <span className="tooltip-container">
                           <img
@@ -1923,7 +1923,7 @@ function Portfolio() {
                         </span>
                       </td>
                     ),
-                    "Part Entry/Exit": colVisPortfolio["Part Entry/Exit"] && (
+                    "Part Entry/Exit": colVisPortfolio[ "Part Entry/Exit" ] && (
                       <td
                         style={{
                           textAlign: "center",
@@ -1946,7 +1946,7 @@ function Portfolio() {
                         </span>
                       </td>
                     ),
-                    "Current Value": colVisPortfolio["Current Value"] && (
+                    "Current Value": colVisPortfolio[ "Current Value" ] && (
                       <td>
                         <input
                           type="number"
@@ -1958,7 +1958,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "Value Per Lot": colVisPortfolio["Value Per Lot"] && (
+                    "Value Per Lot": colVisPortfolio[ "Value Per Lot" ] && (
                       <td>
                         <input
                           type="number"
@@ -1970,7 +1970,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "Underlying LTP": colVisPortfolio["Underlying LTP"] && (
+                    "Underlying LTP": colVisPortfolio[ "Underlying LTP" ] && (
                       <td>
                         <input
                           type="number"
@@ -1985,17 +1985,17 @@ function Portfolio() {
                     "Positional Portfolio": colVisPortfolio[
                       "Positional Portfolio"
                     ] && (
-                      <td>
-                        <input
-                          type="text"
-                          style={{
-                            disable: "none",
-                            padding: "6px",
-                          }}
-                        />
-                      </td>
-                    ),
-                    Product: colVisPortfolio["Product"] && (
+                        <td>
+                          <input
+                            type="text"
+                            style={{
+                              disable: "none",
+                              padding: "6px",
+                            }}
+                          />
+                        </td>
+                      ),
+                    Product: colVisPortfolio[ "Product" ] && (
                       <td>
                         <input
                           type="text"
@@ -2007,7 +2007,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    Strategy: colVisPortfolio["Strategy"] && (
+                    Strategy: colVisPortfolio[ "Strategy" ] && (
                       <td>
                         <input
                           type="text"
@@ -2019,7 +2019,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "Entry Price": colVisPortfolio["Entry Price"] && (
+                    "Entry Price": colVisPortfolio[ "Entry Price" ] && (
                       <td>
                         <input
                           type="number"
@@ -2031,7 +2031,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "Combined Premuim": colVisPortfolio["Combined Premuim"] && (
+                    "Combined Premuim": colVisPortfolio[ "Combined Premuim" ] && (
                       <td>
                         <input
                           type="number"
@@ -2043,7 +2043,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "Per Lot Premuim": colVisPortfolio["Per Lot Premuim"] && (
+                    "Per Lot Premuim": colVisPortfolio[ "Per Lot Premuim" ] && (
                       <td>
                         <input
                           type="number"
@@ -2057,7 +2057,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "Start Time": colVisPortfolio["Start Time"] && (
+                    "Start Time": colVisPortfolio[ "Start Time" ] && (
                       <td>
                         <input
                           type="text"
@@ -2070,21 +2070,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "End Time": colVisPortfolio["End Time"] && (
-                      <td>
-                        <input
-                          type="text"
-                          defaultValue="00:00:00"
-                          style={{
-                            disable: "none",
-                            padding: "6px",
-
-                            alignItems: "center",
-                          }}
-                        />
-                      </td>
-                    ),
-                    "SqOff Time": colVisPortfolio["SqOff Time"] && (
+                    "End Time": colVisPortfolio[ "End Time" ] && (
                       <td>
                         <input
                           type="text"
@@ -2098,7 +2084,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    "Range End Time": colVisPortfolio["Range End Time"] && (
+                    "SqOff Time": colVisPortfolio[ "SqOff Time" ] && (
                       <td>
                         <input
                           type="text"
@@ -2112,7 +2098,21 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    Delta: colVisPortfolio["Delta"] && (
+                    "Range End Time": colVisPortfolio[ "Range End Time" ] && (
+                      <td>
+                        <input
+                          type="text"
+                          defaultValue="00:00:00"
+                          style={{
+                            disable: "none",
+                            padding: "6px",
+
+                            alignItems: "center",
+                          }}
+                        />
+                      </td>
+                    ),
+                    Delta: colVisPortfolio[ "Delta" ] && (
                       <td>
                         <input
                           type="number"
@@ -2135,7 +2135,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    Theta: colVisPortfolio["Theta"] && (
+                    Theta: colVisPortfolio[ "Theta" ] && (
                       <td>
                         <input
                           type="number"
@@ -2152,7 +2152,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    Vega: colVisPortfolio["Vega"] && (
+                    Vega: colVisPortfolio[ "Vega" ] && (
                       <td>
                         <input
                           type="number"
@@ -2169,7 +2169,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    Remarks: colVisPortfolio["Remarks"] && (
+                    Remarks: colVisPortfolio[ "Remarks" ] && (
                       <td>
                         <input
                           type="text"
@@ -2180,7 +2180,7 @@ function Portfolio() {
                         />
                       </td>
                     ),
-                    Message: colVisPortfolio["Message"] && (
+                    Message: colVisPortfolio[ "Message" ] && (
                       <td>
                         <input
                           type="text"
@@ -2197,7 +2197,7 @@ function Portfolio() {
                       {portfolioSeq.map((colName, index) => {
                         return (
                           <React.Fragment key={index}>
-                            {portfolioTD[colName]}
+                            {portfolioTD[ colName ]}
                           </React.Fragment>
                         );
                       })}
@@ -2560,8 +2560,8 @@ function Portfolio() {
                     </tr>
                   </thead>
                   <tbody>
-                    {console.log("subTableData", subTableData)}
-                    {subTableData[0].brokerDetails.map((item, index) => (
+                    {/* {console.log("subTableData", subTableData)} */}
+                    {subTableData[ 0 ].brokerDetails.map((item, index) => (
                       <tr key={index}>
                         <td>
                           <div
@@ -2571,7 +2571,7 @@ function Portfolio() {
                               paddingRight: "15px",
                             }}
                           >
-                            {!isPlusClicked1[index] ? (
+                            {!isPlusClicked1[ index ] ? (
                               <span
                                 style={{
                                   fontSize: "30px",

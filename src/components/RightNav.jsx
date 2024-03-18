@@ -165,8 +165,8 @@ function RightNav() {
 
   const updateRowData = (index, updatedData) => {
     // setRows((prevRows) => {
-    const updatedRows = [...rows]; // Copy the original array
-    updatedRows[index] = { ...updatedRows[index], ...updatedData }; // Update the specific row
+    const updatedRows = [ ...rows ]; // Copy the original array
+    updatedRows[ index ] = { ...updatedRows[ index ], ...updatedData }; // Update the specific row
     // return updatedRows; // Set the updated array as the new state
     dispatch(
       setBrokers({
@@ -189,35 +189,35 @@ function RightNav() {
   const handleMsg = (Msg) => {
     // console.log("consoleMsgs", consoleMsgs)
 
-    const lastMsg = consoleMsgs[0];
+    const lastMsg = consoleMsgs[ 0 ];
     // console.log("lastMsg", lastMsg);
     if (Msg.logType === "MESSAGE" || Msg.logType === "ERROR") {
       if (lastMsg && lastMsg.msg === Msg.msg && lastMsg.user === Msg.user) {
-        console.log("consoleMsgs 1", [Msg, "=", consoleMsgs.slice(1)]);
+        // console.log("consoleMsgs 1", [Msg, "=", consoleMsgs.slice(1)]);
         dispatch(
           setConsoleMsgs({
-            consoleMsgs: [Msg, ...consoleMsgs.slice(1)],
+            consoleMsgs: [ Msg, ...consoleMsgs.slice(1) ],
           }),
         );
       } else {
-        console.log("consoleMsgs 2", Msg, "=", consoleMsgs);
+        // console.log("consoleMsgs 2", Msg, "=", consoleMsgs);
         dispatch(
           setConsoleMsgs({
-            consoleMsgs: [Msg, ...consoleMsgs],
+            consoleMsgs: [ Msg, ...consoleMsgs ],
           }),
         );
       }
     } else {
-      console.log("consoleMsgs 3", [Msg, "=", consoleMsgs]);
+      // console.log("consoleMsgs 3", [Msg, "=", consoleMsgs]);
       dispatch(
         setConsoleMsgs({
-          consoleMsgs: [Msg, ...consoleMsgs],
+          consoleMsgs: [ Msg, ...consoleMsgs ],
         }),
       );
     }
   };
-  const [isOpen1, setIsOpen1] = useState(false);
-  const [colopen1, setColopen1] = useState(false);
+  const [ isOpen1, setIsOpen1 ] = useState(false);
+  const [ colopen1, setColopen1 ] = useState(false);
 
   const toggleOpen1 = () => {
     setColopen1(!colopen1);
@@ -236,7 +236,7 @@ function RightNav() {
       udbtton.style.marginTop = "0";
     }
   };
-  const [executedPortfolios, setExecutedPortfolios] = useState([]);
+  const [ executedPortfolios, setExecutedPortfolios ] = useState([]);
 
   const fetchExecutedPortfolios = async () => {
     try {
@@ -250,7 +250,7 @@ function RightNav() {
         throw new Error("Failed to fetch executed portfolios");
       }
       const data = await response.json();
-      console.log(data, "executed protfolios ");
+      // console.log(data, "executed protfolios ");
       setExecutedPortfolios(data.ExecutedPortfolios);
     } catch (error) {
       console.error("Error fetching executed portfolios:", error.message);
@@ -266,8 +266,8 @@ function RightNav() {
     setIsOpen1(false);
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [colopen, setColopen] = useState(true);
+  const [ isOpen, setIsOpen ] = useState(false);
+  const [ colopen, setColopen ] = useState(true);
 
   const toggleOpen = () => {
     setColopen(!colopen);
@@ -305,7 +305,7 @@ function RightNav() {
   };
 
   // qtp popup
-  const [currentDateTime, setCurrentDateTime] = useState("");
+  const [ currentDateTime, setCurrentDateTime ] = useState("");
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
@@ -322,7 +322,7 @@ function RightNav() {
         hour12: false,
       };
       const formattedDateTime = now.toLocaleString("en-IN", options);
-      const [weekday, day, month, year] = formattedDateTime.split(", ");
+      const [ weekday, day, month, year ] = formattedDateTime.split(", ");
       const rearrangedDateTime = `${day}, ${month} (${weekday}) ${year}`;
       setCurrentDateTime(rearrangedDateTime);
     };
@@ -332,7 +332,7 @@ function RightNav() {
   }, []);
 
   const handleBrokerLogin = async () => {
-    const mandatoryFields = ["userId", "name", "broker", "qrCode", "password"];
+    const mandatoryFields = [ "userId", "name", "broker", "qrCode", "password" ];
     let loginMsgs = [];
     let afterLoginUpdates = [];
     let allDisabled = true;
@@ -356,10 +356,10 @@ function RightNav() {
     }
 
     for (let index = 0; index < rows.length; index++) {
-      const rowData = rows[index];
+      const rowData = rows[ index ];
       if (!rowData.inputDisabled && rowData.enabled) {
         const unfilledFields = mandatoryFields.filter(
-          (field) => !rowData[field],
+          (field) => !rowData[ field ],
         );
         if (unfilledFields.length > 0) {
           // console.log("in if")
@@ -466,7 +466,7 @@ function RightNav() {
           // console.log(rowData.broker, "=", rowData.userId, "=", responseData)
           if (responseData.data) {
             afterLoginUpdates.push({
-              [index]: {
+              [ index ]: {
                 apiUserDetails: responseData.data.data.name,
                 availableMargin: +responseData.data.data.availablecash,
                 net: responseData.data.data.Net
@@ -493,10 +493,10 @@ function RightNav() {
             if (storedData) {
               localStorage.setItem(
                 "storage",
-                JSON.stringify([...storedData, dataChunk]),
+                JSON.stringify([ ...storedData, dataChunk ]),
               );
             } else {
-              localStorage.setItem("storage", JSON.stringify([dataChunk]));
+              localStorage.setItem("storage", JSON.stringify([ dataChunk ]));
             }
           }
 
@@ -533,205 +533,6 @@ function RightNav() {
     return { loginMsgs: loginMsgs.reverse(), afterLoginUpdates };
   };
 
-  // const handleBrokerLogin = async () => {
-  //   const mandatoryFields = [ "userId", "name", "broker", "qrCode", "password" ];
-  //   let loginMsgs = [];
-  //   let afterLoginUpdates = [];
-  //   let allDisabled = true;
-  //   rows.forEach((data) => {
-  //     if (data.enabled) {
-  //       allDisabled = false;
-  //       return;
-  //     }
-  //   });
-
-  //   if (allDisabled) {
-  //     const errorMsg = "Please enable the atleast one broker";
-  //     handleMsg({
-  //       msg: errorMsg,
-  //       logType: "ERROR",
-  //       timestamp: `${new Date().toLocaleString()}`,
-  //       user: "USER",
-  //     });
-
-  //     return;
-  //   }
-
-  //   for (let index = 0; index < rows.length; index++) {
-  //     const rowData = rows[ index ];
-  //     if (!rowData.inputDisabled) {
-  //       // console.log("rowData", rowData, "index", index)
-  //       const unfilledFields = mandatoryFields.filter(
-  //         (field) => !rowData[ field ],
-  //       );
-  //       if (unfilledFields.length > 0) {
-  //         // console.log("in if")
-  //         const errorMsg = `Please enter ${unfilledFields.join(", ")} to confirm broker login. `;
-  //         handleMsg({
-  //           msg: errorMsg,
-  //           logType: "ERROR",
-  //           timestamp: `${new Date().toLocaleString()}`,
-  //           user: rowData.userId !== "" ? rowData.userId : "USER",
-  //         });
-  //       } else {
-  //         if (!rowData.enabled) {
-  //           continue;
-  //         }
-  //         // Skip validation when broker is 'pseudo account'
-  //         if (rowData.broker !== "pseudo account") {
-  //           // checking all fields are entered or not
-  //           if (
-  //             !rowData.userId ||
-  //             (!rowData.apiKey && rowData.broker !== "fyers") ||
-  //             !rowData.qrCode ||
-  //             !rowData.password ||
-  //             !rowData.broker
-  //           ) {
-  //             let missingFields = [];
-  //             if (!rowData.userId) {
-  //               missingFields.push("user Id");
-  //             }
-  //             if (!rowData.apiKey) missingFields.push("API Key");
-  //             if (!rowData.qrCode) missingFields.push("QR code");
-  //             if (!rowData.password) missingFields.push("Pin");
-  //             if (!rowData.broker) missingFields.push("Broker");
-  //             if (rowData.broker === "flattrade" && !rowData.secretKey) {
-  //               missingFields.push("Secret Key");
-  //             }
-  //             if (rowData.broker === "finvasia" && !rowData.imei) {
-  //               missingFields.push("Imei");
-  //             }
-  //             if (rowData.broker === "fyers") {
-  //               missingFields.push("Redirect API Key");
-  //             }
-
-  //             let errorMessage =
-  //               "Please enter the following field(s): " +
-  //               missingFields.join(", ");
-  //             // notifyError(errorMessage);
-  //             handleMsg({
-  //               msg: errorMessage,
-  //               logType: "ERROR",
-  //               timestamp: `${new Date().toLocaleString()}`,
-  //               user: rowData.userId !== "" ? rowData.userId : "USER",
-  //             });
-  //             return;
-  //           }
-  //         }
-
-  //         const data = {
-  //           userId: rowData.userId,
-  //           apiKey: rowData.apiKey,
-  //           qrCode: rowData.qrCode,
-  //           password: rowData.password,
-  //           broker: rowData.broker,
-  //           imei: rowData.imei,
-  //           display_name: rowData.name,
-  //           mainUser,
-  //         };
-
-  //         if (rowData.broker === "fyers") {
-  //           data.secretKey = rowData.secretKey;
-  //           data.client_id = rowData.fyersclientId;
-  //           data.apiKey = null;
-  //         }
-
-  //         if (rowData.broker === "flattrade") {
-  //           data.secretKey = rowData.secretKey;
-  //           data.imei = null;
-  //           data.fyersclientId = null;
-  //         }
-
-  //         if (rowData.broker === "pseudo account") {
-  //           data.apiKey = null;
-  //           data.pin = null;
-  //         }
-  //         const response = await fetch("api/datavalidation", {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify(data), // Convert the data to JSON format
-  //         });
-
-  //         if (!response.ok) {
-  //           const errorData = await response.json();
-  //           loginMsgs.push({
-  //             msg: errorData.message || "An error occurred",
-  //             logType: "ERROR",
-  //             timestamp: `${new Date().toLocaleString()}`,
-  //             user: rowData.userId,
-  //           });
-  //         }
-
-  //         const responseData = await response.json();
-  //         // console.log(rowData.broker, "=", rowData.userId, "=", responseData)
-  //         if (responseData.data) {
-  //           afterLoginUpdates.push({
-  //             [ index ]: {
-  //               apiUserDetails: responseData.data.data.name,
-  //               availableMargin: +responseData.data.data.availablecash,
-  //               net: responseData.data.data.Net
-  //                 ? +responseData.data.data.Net
-  //                 : 0,
-  //               inputDisabled: true,
-  //             },
-  //           });
-  //           // updateRowData(index, {
-  //           //   apiUserDetails: responseData.data.data.name,
-  //           //   availableMargin: +responseData.data.data.availablecash,
-  //           //   net: responseData.data.data.Net ? +responseData.data.data.Net : 0,
-  //           //   inputDisabled: true
-  //           // });
-  //         }
-
-  //         const storedData = JSON.parse(localStorage.getItem("storage"));
-  //         // console.log(storedData);
-  //         if (!responseData.error) {
-  //           const dataChunk = {
-  //             id: rowData.userId,
-  //             margin: +responseData.data.data.availablecash,
-  //           };
-  //           if (storedData) {
-  //             localStorage.setItem(
-  //               "storage",
-  //               JSON.stringify([ ...storedData, dataChunk ]),
-  //             );
-  //           } else {
-  //             localStorage.setItem("storage", JSON.stringify([ dataChunk ]));
-  //           }
-  //         }
-  //         loginMsgs.push({
-  //           msg: `Logged In successfully. - ${rowData.userId}`,
-  //           logType: "MESSAGE",
-  //           timestamp: `${new Date().toLocaleString()}`,
-  //           user: rowData.userId !== "" ? rowData.userId : "USER",
-  //         });
-  //         // if (index === rows.length - 1) {
-  //         //   // console.log("after map loginMsgs",loginMsgs)
-  //         //   dispatch(
-  //         //     setConsoleMsgs({
-  //         //       consoleMsgs: [ ...loginMsgs ].sort((a, b) => a.timestamp - b.timestamp)
-  //         //     })
-  //         //   )
-  //         // }
-  //         // console.log("first after return", loginMsgs)
-  //         // handleMsg({
-  //         //   msg: `Logged In successfully. - ${rowData.userId}`,
-  //         //   logType: "MESSAGE",
-  //         //   timestamp: `${new Date().toLocaleString()}`,
-  //         //   user: rowData.userId!=="" ? rowData.userId : "USER",
-  //         // });
-  //         // notifySuccess(
-  //         //   `Logged In successfully. - ${rowData.userId}`,
-  //         //   rowData.userId,
-  //         // );
-  //       }
-  //     }
-  //   }
-  //   // console.log("first before return", loginMsgs)
-  //   return { loginMsgs: loginMsgs.reverse(), afterLoginUpdates };
-  // };
   return (
     <div className="right-sidebar">
       <div className="date-container">
@@ -746,13 +547,13 @@ function RightNav() {
           // if(loginMsgs.length===(rows.filter(row => row.enabled)).length){
           // console.log("login logs after loop", loginMsgs)
           // console.log("afterLoginUpdates after loop", afterLoginUpdates)
-          const updatedBrokers = [...rows];
+          const updatedBrokers = [ ...rows ];
           afterLoginUpdates.map((update) => {
-            const rdxIndex = Object.keys(update)[0];
-            const rdxValue = Object.values(update)[0];
+            const rdxIndex = Object.keys(update)[ 0 ];
+            const rdxValue = Object.values(update)[ 0 ];
             // console.log("rdxIndex", rdxIndex, "rdxValue", rdxValue)
-            updatedBrokers[rdxIndex] = {
-              ...updatedBrokers[rdxIndex],
+            updatedBrokers[ rdxIndex ] = {
+              ...updatedBrokers[ rdxIndex ],
               ...rdxValue,
             };
           });
@@ -764,7 +565,7 @@ function RightNav() {
           );
           dispatch(
             setConsoleMsgs({
-              consoleMsgs: [...loginMsgs, ...consoleMsgs],
+              consoleMsgs: [ ...loginMsgs, ...consoleMsgs ],
             }),
           );
           // }
@@ -934,9 +735,8 @@ function RightNav() {
                     <span>Orders</span>
                   </div>
                   <div
-                    className={`toggle-switch ${
-                      pathname.includes("/F&O/Portfolio") ? "active" : ""
-                    }`}
+                    className={`toggle-switch ${pathname.includes("/F&O/Portfolio") ? "active" : ""
+                      }`}
                     onClick={() => navigate("/F&O/Portfolio")}
                   >
                     <span>Portfolio</span>
@@ -965,7 +765,7 @@ function RightNav() {
                     marginTop: "3.2rem",
                   }}
                   onClick={() => navigate("/F&O/AddPortfolio")}
-                  // onClick={handleAddPortfolioClick}
+                // onClick={handleAddPortfolioClick}
                 >
                   <div>
                     <span>Add Portfolio</span>

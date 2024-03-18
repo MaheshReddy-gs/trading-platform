@@ -21,16 +21,16 @@ export const TopNav = ({
   setSeq,
   rows,
 }) => {
-  const [orderflow, setorderflow] = useState(false);
-  const [ordermanagement, setordermanagement] = useState(false);
-  const [holdings, setholdings] = useState(false);
+  const [ orderflow, setorderflow ] = useState(false);
+  const [ ordermanagement, setordermanagement ] = useState(false);
+  const [ holdings, setholdings ] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [columnHideDropDown, setcolumnHideDropDown] = useState(false);
-  console.log(rows, "");
+  const [ columnHideDropDown, setcolumnHideDropDown ] = useState(false);
+  // console.log(rows, "");
 
   // Dependency on the pathname
-  const [totalAccounts, setTotalAccounts] = useState(0);
+  const [ totalAccounts, setTotalAccounts ] = useState(0);
 
   useEffect(() => {
     if (rows) {
@@ -45,9 +45,9 @@ export const TopNav = ({
       ).length;
       setTotalAccounts(count);
     }
-  }, [rows]);
+  }, [ rows ]);
 
-  const [loggedAccounts, setLoggedAccounts] = useState(0);
+  const [ loggedAccounts, setLoggedAccounts ] = useState(0);
 
   useEffect(() => {
     if (rows) {
@@ -56,13 +56,13 @@ export const TopNav = ({
       });
       setLoggedAccounts(loggedAccountsArray.length);
     }
-  }, [rows]);
+  }, [ rows ]);
 
   const totalAccountsStyle = { color: "red" };
   const loggedAccountsStyle = { color: "green" };
 
-  const [openPosition, setopenPosition] = useState(0);
-  const [closePosition, setclosePosition] = useState(0);
+  const [ openPosition, setopenPosition ] = useState(0);
+  const [ closePosition, setclosePosition ] = useState(0);
 
   window.addEventListener("click", (e) => {
     if (columnHideDropDown) {
@@ -142,16 +142,16 @@ export const TopNav = ({
                 return (
                   <label
                     key={index}
-                    style={!colVis[columnName] ? { color: "red" } : null}
+                    style={!colVis[ columnName ] ? { color: "red" } : null}
                   >
                     <input
                       type="checkbox"
-                      checked={!colVis[columnName]}
+                      checked={!colVis[ columnName ]}
                       onClick={() => {
                         setColsSelectedALL((prev) => (prev ? false : prev));
                         setColVis((prev) => ({
                           ...prev,
-                          [columnName]: !prev[columnName],
+                          [ columnName ]: !prev[ columnName ],
                         }));
                         setSeq((prev) => {
                           if (prev.includes(columnName)) {
@@ -160,7 +160,7 @@ export const TopNav = ({
                             );
                             return newOrder;
                           } else {
-                            return [...prev, columnName];
+                            return [ ...prev, columnName ];
                           }
                         });
                       }}

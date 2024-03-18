@@ -159,10 +159,7 @@ const Change_Password = () => {
               src={registerPage2_img}
               alt="img"
               className="image2"
-              style={{
-                height: "100vh",
-                right: 0,
-              }}
+              style={{ height: "100vh", right: 0 }}
             />
           </div>
         </div>

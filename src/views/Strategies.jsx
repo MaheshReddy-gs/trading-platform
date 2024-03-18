@@ -31,8 +31,8 @@ function Strategies() {
 
   const dispatch = useDispatch();
   const { consoleMsgs } = useSelector((state) => state.consoleMsgsReducer);
-  const [showSelectBox1, setShowSelectBox1] = useState(false);
-  const [clearedCells, setClearedCells] = useState([]);
+  const [ showSelectBox1, setShowSelectBox1 ] = useState(false);
+  const [ clearedCells, setClearedCells ] = useState([]);
   const { strategies: data } = useSelector((state) => state.strategyReducer); // console.log("startegyState", startegyState)
   // const [ data, setData ] = useState(startegyState.strategies);
 
@@ -48,10 +48,10 @@ function Strategies() {
   //   );
   // }, [ data ]);
 
-  
+
 
   const handleClickOutside = (e) => {
-    const allowedElements = [".dropdown-menu", ".popTableHead img"];
+    const allowedElements = [ ".dropdown-menu", ".popTableHead img" ];
     if (!allowedElements.some((element) => e.target.closest(element))) {
       setIsdropDownOpenMargin(false);
       setIsdropDownOpenBroker(false);
@@ -59,10 +59,10 @@ function Strategies() {
     }
   };
 
-  const [filteredRows1, setFilteredRows1] = useState(data);
+  const [ filteredRows1, setFilteredRows1 ] = useState(data);
   useEffect(() => {
     setFilteredRows1(data);
-  }, [data]);
+  }, [ data ]);
 
   const updateFilteredRows1 = ({
     userIdSelected1,
@@ -155,13 +155,13 @@ function Strategies() {
     }
   };
 
-  const [showSearchId1, setShowSearchId1] = useState(false);
-  const [showSearchMaxProfit1, setShowSearchMaxProfit1] = useState(false);
-  const [showSearchMaxLoss1, setShowSearchMaxLoss1] = useState(false);
-  const [showSearchNet1, setShowSearchNet1] = useState(false);
+  const [ showSearchId1, setShowSearchId1 ] = useState(false);
+  const [ showSearchMaxProfit1, setShowSearchMaxProfit1 ] = useState(false);
+  const [ showSearchMaxLoss1, setShowSearchMaxLoss1 ] = useState(false);
+  const [ showSearchNet1, setShowSearchNet1 ] = useState(false);
 
   const handleCloseAllSearchBox = (e) => {
-    const allowedElements = ["th img", ".Filter-popup"];
+    const allowedElements = [ "th img", ".Filter-popup" ];
     if (!allowedElements.some((element) => e.target.closest(element))) {
       // The click was outside of the allowed elements, perform your function here
       setShowSearchId1(false);
@@ -171,32 +171,32 @@ function Strategies() {
     }
   };
 
-  const [selectAllForId1, setSelectAllForId1] = useState(false);
-  const [selectAllNet1, setSelectAllNet1] = useState(false);
-  const [selectAllMaxProfit1, setSelectAllMaxProfit1] = useState(false);
-  const [selectAllMaxLoss1, setSelectAllMaxLoss1] = useState(false);
+  const [ selectAllForId1, setSelectAllForId1 ] = useState(false);
+  const [ selectAllNet1, setSelectAllNet1 ] = useState(false);
+  const [ selectAllMaxProfit1, setSelectAllMaxProfit1 ] = useState(false);
+  const [ selectAllMaxLoss1, setSelectAllMaxLoss1 ] = useState(false);
 
-  const [uniqueDatauserId1, setuniqueDatauserId1] = useState([]);
-  const [uniqueDataNet1, setuniqueDataNet1] = useState([]);
-  const [uniqueDataMaxProfit1, setuniqueDataMaxProfit1] = useState([]);
-  const [uniqueDataMaxLoss1, setuniqueDataMaxLoss1] = useState([]);
+  const [ uniqueDatauserId1, setuniqueDatauserId1 ] = useState([]);
+  const [ uniqueDataNet1, setuniqueDataNet1 ] = useState([]);
+  const [ uniqueDataMaxProfit1, setuniqueDataMaxProfit1 ] = useState([]);
+  const [ uniqueDataMaxLoss1, setuniqueDataMaxLoss1 ] = useState([]);
 
-  const [userIdSelected1, setuserIdSelected1] = useState([]);
-  const [maxProfitSelected1, setMaxProfitSelected1] = useState([]);
-  const [netSelected1, setNetSelected1] = useState([]);
-  const [maxLossSelected1, setMaxLossSelected1] = useState([]);
+  const [ userIdSelected1, setuserIdSelected1 ] = useState([]);
+  const [ maxProfitSelected1, setMaxProfitSelected1 ] = useState([]);
+  const [ netSelected1, setNetSelected1 ] = useState([]);
+  const [ maxLossSelected1, setMaxLossSelected1 ] = useState([]);
 
   useEffect(() => {
     // console.log("stpage data", data)
     setuniqueDatauserId1(
-      data ? [...new Set(data.map((d) => d.StrategyLabel))] : [],
+      data ? [ ...new Set(data.map((d) => d.StrategyLabel)) ] : [],
     );
 
     setuniqueDataMaxProfit1(
-      data ? [...new Set(data.map((d) => d.MaxProfit))] : [],
+      data ? [ ...new Set(data.map((d) => d.MaxProfit)) ] : [],
     );
 
-    setuniqueDataMaxLoss1(data ? [...new Set(data.map((d) => d.MaxLoss))] : []);
+    setuniqueDataMaxLoss1(data ? [ ...new Set(data.map((d) => d.MaxLoss)) ] : []);
 
     setuniqueDataNet1([
       ...new Set(
@@ -207,7 +207,7 @@ function Strategies() {
         }),
       ),
     ]);
-  }, [data]);
+  }, [ data ]);
 
   const handleCheckboxChangeNet1 = (PL) => {
     const isSelected = netSelected1.includes(PL);
@@ -215,7 +215,7 @@ function Strategies() {
       setNetSelected1(netSelected1.filter((item) => item !== PL));
       setSelectAllNet1(false);
     } else {
-      setNetSelected1((prevSelected) => [...prevSelected, PL]);
+      setNetSelected1((prevSelected) => [ ...prevSelected, PL ]);
       setSelectAllNet1(netSelected1.length === uniqueDataNet1.length - 1);
     }
   };
@@ -239,7 +239,7 @@ function Strategies() {
       );
       setSelectAllForId1(false);
     } else {
-      setuserIdSelected1((prevSelected) => [...prevSelected, StrategyLabel]);
+      setuserIdSelected1((prevSelected) => [ ...prevSelected, StrategyLabel ]);
       setSelectAllForId1(
         userIdSelected1.length === uniqueDatauserId1.length - 1,
       );
@@ -264,7 +264,7 @@ function Strategies() {
       );
       setSelectAllMaxProfit1(false);
     } else {
-      setMaxProfitSelected1((prevSelected) => [...prevSelected, MaxProfit]);
+      setMaxProfitSelected1((prevSelected) => [ ...prevSelected, MaxProfit ]);
       setSelectAllMaxProfit1(
         maxProfitSelected1.length === uniqueDataMaxProfit1.length - 1,
       );
@@ -279,7 +279,7 @@ function Strategies() {
       );
       setSelectAllMaxLoss1(false);
     } else {
-      setMaxLossSelected1((prevSelected) => [...prevSelected, MaxLoss]);
+      setMaxLossSelected1((prevSelected) => [ ...prevSelected, MaxLoss ]);
       setSelectAllMaxLoss1(
         maxLossSelected1.length === uniqueDataMaxLoss1.length - 1,
       );
@@ -307,7 +307,7 @@ function Strategies() {
       setMaxLossSelected1([]);
     }
   };
-  const [dataNew, setDataNew] = useState([
+  const [ dataNew, setDataNew ] = useState([
     {
       Select: false,
       UserID: "Simulitor",
@@ -321,14 +321,14 @@ function Strategies() {
 
   const errorContainerRef = useRef(null);
   // Error Message start
-  const [msgs, setMsgs] = useState([]);
+  const [ msgs, setMsgs ] = useState([]);
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(null);
-  const [filteredDataNew, setfilteredDataNew] = useState([]);
+  const [ userData, setUserData ] = useState(null);
+  const [ filteredDataNew, setfilteredDataNew ] = useState([]);
 
   useEffect(() => {
     setfilteredDataNew(dataNew);
-  }, [dataNew]);
+  }, [ dataNew ]);
 
   // useEffect(() => {
   //   console.log("filteredDataNew", filteredDataNew)
@@ -339,7 +339,7 @@ function Strategies() {
     setMsgs([]);
   };
   const handleMsg = (Msg) => {
-    const lastMsg = consoleMsgs[0];
+    const lastMsg = consoleMsgs[ 0 ];
     if (Msg.logType === "MESSAGE" || Msg.logType === "ERROR") {
       if (
         lastMsg &&
@@ -349,43 +349,43 @@ function Strategies() {
       ) {
         dispatch(
           setConsoleMsgs({
-            consoleMsgs: [Msg, ...consoleMsgs.slice(1)],
+            consoleMsgs: [ Msg, ...consoleMsgs.slice(1) ],
           }),
         );
       } else {
         dispatch(
           setConsoleMsgs({
-            consoleMsgs: [Msg, ...consoleMsgs],
+            consoleMsgs: [ Msg, ...consoleMsgs ],
           }),
         );
       }
     } else {
       dispatch(
         setConsoleMsgs({
-          consoleMsgs: [Msg, ...consoleMsgs],
+          consoleMsgs: [ Msg, ...consoleMsgs ],
         }),
       );
     }
   };
   // Error Message end
-  const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
+  const [ isErrorDisplayed, setIsErrorDisplayed ] = useState(false);
 
   // st colvisible
   const addNewRow = () => {
-    const mandatoryFields = ["StrategyLabel", "TradingAccount"];
+    const mandatoryFields = [ "StrategyLabel", "TradingAccount" ];
 
-    const lastRow = data[data.length - 1];
-    const allFieldsFilled = mandatoryFields.every((field) => lastRow[field]);
+    const lastRow = data[ data.length - 1 ];
+    const allFieldsFilled = mandatoryFields.every((field) => lastRow[ field ]);
 
     if (allFieldsFilled) {
       setIsErrorDisplayed(false);
 
-      const newStrategyLabel = lastRow["StrategyLabel"];
+      const newStrategyLabel = lastRow[ "StrategyLabel" ];
       const isUnique =
         data.length < 2 ||
         data
           .slice(0, -1)
-          .every((row) => row["StrategyLabel"] !== newStrategyLabel);
+          .every((row) => row[ "StrategyLabel" ] !== newStrategyLabel);
 
       if (isUnique) {
         setIsErrorDisplayed(false);
@@ -431,7 +431,7 @@ function Strategies() {
         // setData((prevData) => [ ...prevData, newRow ]);
         dispatch(
           setStrategies({
-            strategies: [...data, newRow],
+            strategies: [ ...data, newRow ],
           }),
         );
       } else {
@@ -466,10 +466,10 @@ function Strategies() {
     }, 100); // Adjust the timeout as needed
 
     return () => clearTimeout(scrollTimeout); // Clear the timeout if the component unmounts or data changes
-  }, [data.length]);
-  const [isModalOpen, setModalOpen] = useState(false);
+  }, [ data.length ]);
+  const [ isModalOpen, setModalOpen ] = useState(false);
   const handleCellClick = (tradingAccountData, index) => {
-    if (!data[index].StrategyLabel) {
+    if (!data[ index ].StrategyLabel) {
       handleMsg({
         msg: "Please enter the Strategy Label",
         logType: "ERROR",
@@ -479,12 +479,12 @@ function Strategies() {
     } else {
       setSelectedTradingAccount({
         ...tradingAccountData,
-        StrategyLabel: data[index].StrategyLabel,
+        StrategyLabel: data[ index ].StrategyLabel,
       });
       setModalOpen(true);
       setClickedRowIndex(index); // Save the index of the clicked row
       // setting checkbox ticked
-      const checkedboxes = data[index].TradingAccount.split(",").map((item) =>
+      const checkedboxes = data[ index ].TradingAccount.split(",").map((item) =>
         item.trim(),
       );
 
@@ -498,7 +498,7 @@ function Strategies() {
       });
     }
   };
-  const [selectedTradingAccount, setSelectedTradingAccount] = useState(null);
+  const [ selectedTradingAccount, setSelectedTradingAccount ] = useState(null);
 
   const handleCloseModal = () => {
     setSelectedTradingAccount(null);
@@ -510,9 +510,9 @@ function Strategies() {
       });
     });
   };
-  const [clickedRowIndex, setClickedRowIndex] = useState(-1);
+  const [ clickedRowIndex, setClickedRowIndex ] = useState(-1);
 
-  const [selectAllChecked, setSelectAllChecked] = useState(false);
+  const [ selectAllChecked, setSelectAllChecked ] = useState(false);
 
   const handleSelectAll = () => {
     setisPopUpDataChanged(true);
@@ -525,15 +525,15 @@ function Strategies() {
     );
   };
 
-  const [isdropDownOpenUserID, setIsdropDownOpenUserID] = useState(false);
-  const [isdropDownOpenBroker, setIsdropDownOpenBroker] = useState(false);
-  const [isdropDownOpenMargin, setIsdropDownOpenMargin] = useState(false);
-  const [isdropDownOpenAlias, setIsdropDownOpenAlias] = useState(false);
+  const [ isdropDownOpenUserID, setIsdropDownOpenUserID ] = useState(false);
+  const [ isdropDownOpenBroker, setIsdropDownOpenBroker ] = useState(false);
+  const [ isdropDownOpenMargin, setIsdropDownOpenMargin ] = useState(false);
+  const [ isdropDownOpenAlias, setIsdropDownOpenAlias ] = useState(false);
 
-  const [isPopUpDataChanged, setisPopUpDataChanged] = useState(false);
+  const [ isPopUpDataChanged, setisPopUpDataChanged ] = useState(false);
 
   const handleCheckboxChange = (index) => {
-    console.log("handleCheckboxChange ");
+    // console.log("handleCheckboxChange ");
     setisPopUpDataChanged(true);
     // const newData = dataNew.map((item, i) => ({
     //   ...item,
@@ -544,7 +544,7 @@ function Strategies() {
         ...item,
         Select: i === index ? !item.Select : item.Select,
       }));
-      console.log("newData", newData);
+      // console.log("newData", newData);
       setSelectAllChecked(newData.every((item) => item.Select));
       return newData;
     });
@@ -562,14 +562,14 @@ function Strategies() {
     const selectedStrategies = dataNew.filter((item) => item.Select === true);
     const stringVal = selectedStrategies.map((item) => item.UserID).join(", ");
 
-    console.log(
-      "Selected Strategies:",
-      selectedStrategies.map((item) => item.UserID).join(", "),
-    );
-    const newData = [...data];
+    // console.log(
+    //   "Selected Strategies:",
+    //   selectedStrategies.map((item) => item.UserID).join(", "),
+    // );
+    const newData = [ ...data ];
     if (clickedRowIndex !== -1) {
-      newData[clickedRowIndex] = {
-        ...newData[clickedRowIndex],
+      newData[ clickedRowIndex ] = {
+        ...newData[ clickedRowIndex ],
         // TradingAccount: stringVal || 'sim1',
         TradingAccount: stringVal || "",
         // Select: false
@@ -596,7 +596,7 @@ function Strategies() {
           multiplier: selectedStrategies.map((item) => {
             return item.Multiplier;
           }),
-          strategy_tag: data[clickedRowIndex].StrategyLabel,
+          strategy_tag: data[ clickedRowIndex ].StrategyLabel,
           alias: selectedStrategies.map((item) => {
             return item.Alias;
           }),
@@ -628,7 +628,7 @@ function Strategies() {
           msg: responseData.message,
           logType: "SUCCESS",
           timestamp: `${new Date().toLocaleString()}`,
-          strategy: data[clickedRowIndex].StrategyLabel,
+          strategy: data[ clickedRowIndex ].StrategyLabel,
         });
       } catch (error) {
         // console.log(error.message);
@@ -637,7 +637,7 @@ function Strategies() {
           msg: error.message,
           logType: "ERROR",
           timestamp: `${new Date().toLocaleString()}`,
-          strategy: data[clickedRowIndex].StrategyLabel,
+          strategy: data[ clickedRowIndex ].StrategyLabel,
         });
       }
     };
@@ -651,13 +651,13 @@ function Strategies() {
 
   const handleManualSquareOff = async (strategyLabel, TradingAccount) => {
     try {
-      console.log(TradingAccount.split(", "), "TradingAccount");
+      // console.log(TradingAccount.split(", "), "TradingAccount");
       const mappedUserIds = TradingAccount.split(", ");
 
       for (let index = 0; index < mappedUserIds.length; index++) {
         const rowData = brokers.filter(
-          (row) => row.userId === mappedUserIds[index],
-        )[0];
+          (row) => row.userId === mappedUserIds[ index ],
+        )[ 0 ];
         // console.log("rowData", rowData)
         if (rowData.broker === "fyers") {
           const response = await fetch(
@@ -671,16 +671,16 @@ function Strategies() {
           );
           // console.log("Response received:", response);
           if (!response.ok) {
-            console.log("123");
+            // console.log("123");
             const errorData = await response.json();
-            console.log("456");
-            console.log({
-              msg: errorData.message,
-              logType: "ERROR",
-              timestamp: `${new Date().toLocaleString()}`,
-              user: rowData.userId,
-              strategy: strategyLabel,
-            });
+            // console.log("456");
+            // console.log({
+            //   msg: errorData.message,
+            //   logType: "ERROR",
+            //   timestamp: `${new Date().toLocaleString()}`,
+            //   user: rowData.userId,
+            //   strategy: strategyLabel,
+            // });
             handleMsg({
               msg: errorData.message,
               logType: "ERROR",
@@ -703,10 +703,10 @@ function Strategies() {
           // console.log(responseData, "")
         }
         if (rowData.broker === "angelone") {
-          console.log(
-            "angelone api ",
-            `api/angelone_manual_square_off/${mainUser}/${strategyLabel}/${rowData.userId}`,
-          );
+          // console.log(
+          //   "angelone api ",
+          //   `api/angelone_manual_square_off/${mainUser}/${strategyLabel}/${rowData.userId}`,
+          // );
           const response = await fetch(
             `api/angelone_manual_square_off/${mainUser}/${strategyLabel}/${rowData.userId}`,
             {
@@ -726,13 +726,13 @@ function Strategies() {
               user: rowData.userId,
               strategy: strategyLabel,
             });
-            console.log({
-              msg: errorData.message,
-              logType: "ERROR",
-              timestamp: `${new Date().toLocaleString()}`,
-              user: rowData.userId,
-              strategy: strategyLabel,
-            });
+            // console.log({
+            //   msg: errorData.message,
+            //   logType: "ERROR",
+            //   timestamp: `${new Date().toLocaleString()}`,
+            //   user: rowData.userId,
+            //   strategy: strategyLabel,
+            // });
             // throw new Error(
             //   errorData.message || "Something bad happened. Please try again",
             // );
@@ -755,9 +755,9 @@ function Strategies() {
 
   const handleInputChangeInputs = (index, fieldName, value) => {
     setDataNew((prevData) => {
-      const newData = [...prevData];
+      const newData = [ ...prevData ];
       newData.forEach((row) => {
-        row[fieldName] = value;
+        row[ fieldName ] = value;
       });
 
       return newData;
@@ -779,7 +779,7 @@ function Strategies() {
         }
 
         const data = await response.json();
-        console.log("strategies details", data);
+        // console.log("strategies details", data);
         setUserData(data);
 
         // Getting data from local storage
@@ -791,7 +791,7 @@ function Strategies() {
             (item) => item.id == idToFind,
           );
           return matchingItems.length > 0
-            ? matchingItems[matchingItems.length - 1].margin
+            ? matchingItems[ matchingItems.length - 1 ].margin
             : 1;
         };
 
@@ -802,9 +802,9 @@ function Strategies() {
           Broker: account.broker,
           Alias: account.display_name,
           Multiplier: selectedTradingAccount
-            ? account.multiplier[selectedTradingAccount.StrategyLabel]
+            ? account.multiplier[ selectedTradingAccount.StrategyLabel ]
             : 1,
-          Margin: brokers.filter((row) => account.broker_id === row.userId)[0][
+          Margin: brokers.filter((row) => account.broker_id === row.userId)[ 0 ][
             "availableMargin"
           ],
         }));
@@ -826,7 +826,7 @@ function Strategies() {
         // Preserve the existing checkbox state
         const updatedDataNew = postData.map((item, index) => ({
           ...item,
-          Select: dataNew[index] ? dataNew[index].Select : false,
+          Select: dataNew[ index ] ? dataNew[ index ].Select : false,
         }));
 
         setDataNew(updatedDataNew);
@@ -839,9 +839,9 @@ function Strategies() {
     };
 
     fetchData(cookies.get("USERNAME"));
-  }, [selectedTradingAccount]);
+  }, [ selectedTradingAccount ]);
 
-  const [allStrategiesList, setallStrategiesList] = useState([]);
+  const [ allStrategiesList, setallStrategiesList ] = useState([]);
 
   const stPageCols = [
     "Action",
@@ -881,14 +881,14 @@ function Strategies() {
   const allSeqState = useSelector((state) => state.allSeqReducer);
   const allVisState = useSelector((state) => state.allVisReducer);
 
-  const [stColVis, setstColVis] = useState(allVisState.strategiesVis);
+  const [ stColVis, setstColVis ] = useState(allVisState.strategiesVis);
 
   // empty state define
   const handleStrategyRowDelete = async (index) => {
     try {
       const username = cookies.get("USERNAME");
-      const strategyLabel = data[index]?.StrategyLabel;
-      const tradingAccount = data[index]?.TradingAccount;
+      const strategyLabel = data[ index ]?.StrategyLabel;
+      const tradingAccount = data[ index ]?.TradingAccount;
 
       // console.log("USERNAME:", username);
       // console.log("StrategyLabel:", strategyLabel);
@@ -965,7 +965,7 @@ function Strategies() {
 
   const handleInputChange = (index, fieldName, value) => {
     // setData((prevData) => {
-    let newData = [...data];
+    let newData = [ ...data ];
     // console.log("newData", newData)
     const newStrategyLabel = value.toUpperCase().trim();
 
@@ -977,16 +977,16 @@ function Strategies() {
         newData
           .slice(0, -1)
           .every(
-            (row) => row["StrategyLabel"].toUpperCase() !== newStrategyLabel,
+            (row) => row[ "StrategyLabel" ].toUpperCase() !== newStrategyLabel,
           );
 
       if (!isUnique) {
-        newData[index] = {
-          ...newData[index],
-          [fieldName]: "",
+        newData[ index ] = {
+          ...newData[ index ],
+          [ fieldName ]: "",
         };
 
-        setClearedCells((prevClearedCells) => [...prevClearedCells, index]);
+        setClearedCells((prevClearedCells) => [ ...prevClearedCells, index ]);
 
         const currentRowInput = document.getElementById(
           `input_${index}_StrategyLabel`,
@@ -1009,9 +1009,9 @@ function Strategies() {
     }
     // console.log("newData[index][fieldName] ", newData[index])
 
-    newData[index] = {
-      ...newData[index],
-      [fieldName]: newStrategyLabel,
+    newData[ index ] = {
+      ...newData[ index ],
+      [ fieldName ]: newStrategyLabel,
     };
     // return newData;
     dispatch(
@@ -1025,16 +1025,16 @@ function Strategies() {
   const updateActionProperty = (index, property, value) => {
     // setData((prevData) => {
     // Create a copy of the data array
-    const newData = [...data];
+    const newData = [ ...data ];
 
     // Create a copy of the Action object for the specified index
-    const updatedAction = { ...newData[index].Action };
+    const updatedAction = { ...newData[ index ].Action };
 
     // Update the specified property inside the Action object
-    updatedAction[property] = value;
+    updatedAction[ property ] = value;
 
     // Update the Action object inside the data array for the specified index
-    newData[index] = { ...newData[index], Action: updatedAction };
+    newData[ index ] = { ...newData[ index ], Action: updatedAction };
 
     // return newData;
     dispatch(
@@ -1045,19 +1045,19 @@ function Strategies() {
     // });
   };
 
-  const [stColsSelectedALL, setstColsSelectedALL] = useState(false);
+  const [ stColsSelectedALL, setstColsSelectedALL ] = useState(false);
 
   const stPageColSelectAll = () => {
     setstColsSelectedALL((prev) => !prev);
     stPageCols.map((stPageCol) => {
       setstColVis((prev) => ({
         ...prev,
-        [stPageCol]: stColsSelectedALL,
+        [ stPageCol ]: stColsSelectedALL,
       }));
     });
   };
 
-  const [strategiesSeq, setstrategiesSeq] = useState(allSeqState.strategiesSeq);
+  const [ strategiesSeq, setstrategiesSeq ] = useState(allSeqState.strategiesSeq);
 
   useEffect(() => {
     setstrategiesSeq(allSeqState.strategiesSeq);
@@ -1065,9 +1065,9 @@ function Strategies() {
       const colVis = {};
       Object.keys(stColVis).map((col) => {
         if (allSeqState.strategiesSeq.includes(col)) {
-          colVis[col] = true;
+          colVis[ col ] = true;
         } else {
-          colVis[col] = false;
+          colVis[ col ] = false;
         }
       });
       // console.log("{...prev, ...colVis}", {...prev, ...colVis})
@@ -1089,7 +1089,7 @@ function Strategies() {
         setstrategiesSeq([]);
       }
     }
-  }, [stColVis]);
+  }, [ stColVis ]);
 
   useEffect(() => {
     // console.log("userProfSeq", userProfSeq)
@@ -1099,12 +1099,12 @@ function Strategies() {
         strategiesSeq: strategiesSeq,
       }),
     );
-  }, [strategiesSeq]);
+  }, [ strategiesSeq ]);
 
-  const [actionFilter, setActionFilter] = useState("all");
+  const [ actionFilter, setActionFilter ] = useState("all");
 
   const strategiesTH = {
-    Action: stColVis["Action"] && (
+    Action: stColVis[ "Action" ] && (
       <th>
         <div>
           <small>Action</small>
@@ -1142,14 +1142,14 @@ function Strategies() {
         )}
       </th>
     ),
-    "Manual Square Off": stColVis["Manual Square Off"] && (
+    "Manual Square Off": stColVis[ "Manual Square Off" ] && (
       <th>
         <div>
           <small>Manual Square Off</small>
         </div>
       </th>
     ),
-    "Strategy Label": stColVis["Strategy Label"] && (
+    "Strategy Label": stColVis[ "Strategy Label" ] && (
       <th>
         <div>
           <small>Strategy Label</small>
@@ -1223,7 +1223,7 @@ function Strategies() {
         )}
       </th>
     ),
-    "P L": stColVis["P L"] && (
+    "P L": stColVis[ "P L" ] && (
       <th>
         <div>
           <small>P&L</small>
@@ -1289,7 +1289,7 @@ function Strategies() {
         )}
       </th>
     ),
-    "Trade Size": stColVis["Trade Size"] && (
+    "Trade Size": stColVis[ "Trade Size" ] && (
       <th>
         <div>
           <small>Trade Size</small>
@@ -1305,7 +1305,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Duplicate Signal Prevention": stColVis["Duplicate Signal Prevention"] && (
+    "Duplicate Signal Prevention": stColVis[ "Duplicate Signal Prevention" ] && (
       <th>
         <div>
           <small>
@@ -1323,7 +1323,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Open Time": stColVis["Open Time"] && (
+    "Open Time": stColVis[ "Open Time" ] && (
       <th>
         <div>
           <small>Open Time</small>
@@ -1339,7 +1339,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Close Time": stColVis["Close Time"] && (
+    "Close Time": stColVis[ "Close Time" ] && (
       <th>
         <div>
           <small>Close Time</small>
@@ -1355,7 +1355,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Sq Off Time": stColVis["Sq Off Time"] && (
+    "Sq Off Time": stColVis[ "Sq Off Time" ] && (
       <th>
         <div>
           <small>Sq Off Time</small>
@@ -1371,7 +1371,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Trading Account": stColVis["Trading Account"] && (
+    "Trading Account": stColVis[ "Trading Account" ] && (
       <th>
         <div style={{ display: "flex", alignItems: "center" }}>
           <small style={{ marginLeft: "37%" }}>Trading Account</small>
@@ -1387,7 +1387,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Max Profit": stColVis["Max Profit"] && (
+    "Max Profit": stColVis[ "Max Profit" ] && (
       <th>
         <div>
           <small>Max Profit</small>
@@ -1454,7 +1454,7 @@ function Strategies() {
         )}
       </th>
     ),
-    "Max Loss": stColVis["Max Loss"] && (
+    "Max Loss": stColVis[ "Max Loss" ] && (
       <th>
         <div>
           <small>Max Loss</small>
@@ -1519,7 +1519,7 @@ function Strategies() {
         )}
       </th>
     ),
-    "Max Loss Wait Time": stColVis["Max Loss Wait Time"] && (
+    "Max Loss Wait Time": stColVis[ "Max Loss Wait Time" ] && (
       <th>
         <div>
           <small>Max Loss Wait Time</small>
@@ -1534,7 +1534,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Profit Locking": stColVis["Profit Locking"] && (
+    "Profit Locking": stColVis[ "Profit Locking" ] && (
       <th>
         <div>
           <small>Profit Locking</small>
@@ -1549,7 +1549,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Delay Between Users": stColVis["Delay Between Users"] && (
+    "Delay Between Users": stColVis[ "Delay Between Users" ] && (
       <th>
         <div>
           <small>Delay Between Users</small>
@@ -1564,7 +1564,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Unique ID Req for Order": stColVis["Unique ID Req for Order"] && (
+    "Unique ID Req for Order": stColVis[ "Unique ID Req for Order" ] && (
       <th>
         <div>
           <small>
@@ -1581,7 +1581,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Cancel Previous Open Signal": stColVis["Cancel Previous Open Signal"] && (
+    "Cancel Previous Open Signal": stColVis[ "Cancel Previous Open Signal" ] && (
       <th>
         <div>
           <small>
@@ -1600,7 +1600,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Stop Reverse": stColVis["Stop Reverse"] && (
+    "Stop Reverse": stColVis[ "Stop Reverse" ] && (
       <th>
         <div>
           <small>Stop & Reverse</small>
@@ -1615,7 +1615,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Part Multi Exists": stColVis["Part Multi Exists"] && (
+    "Part Multi Exists": stColVis[ "Part Multi Exists" ] && (
       <th>
         <div>
           <small>Part / Multi Exists</small>
@@ -1630,7 +1630,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Hold Sell Seconds": stColVis["Hold Sell Seconds"] && (
+    "Hold Sell Seconds": stColVis[ "Hold Sell Seconds" ] && (
       <th>
         <div>
           <small>Hold Sell Seconds</small>
@@ -1645,7 +1645,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Allowed Trades": stColVis["Allowed Trades"] && (
+    "Allowed Trades": stColVis[ "Allowed Trades" ] && (
       <th>
         <div>
           <small>Allowed Trades</small>
@@ -1660,7 +1660,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Entry Order Retry": stColVis["Entry Order Retry"] && (
+    "Entry Order Retry": stColVis[ "Entry Order Retry" ] && (
       <th>
         <div>
           <small>Entry Order Retry</small>
@@ -1675,7 +1675,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Entry Retry Count": stColVis["Entry Retry Count"] && (
+    "Entry Retry Count": stColVis[ "Entry Retry Count" ] && (
       <th>
         <div>
           <small>Entry Retry Count</small>
@@ -1690,7 +1690,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Entry Retry Wait Seconds": stColVis["Entry Retry Wait Seconds"] && (
+    "Entry Retry Wait Seconds": stColVis[ "Entry Retry Wait Seconds" ] && (
       <th>
         <div>
           <small>
@@ -1707,7 +1707,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Exit Order Retry": stColVis["Exit Order Retry"] && (
+    "Exit Order Retry": stColVis[ "Exit Order Retry" ] && (
       <th>
         <div>
           <small>Exit Order Retry</small>
@@ -1722,7 +1722,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Exit Retry Count": stColVis["Exit Retry Count"] && (
+    "Exit Retry Count": stColVis[ "Exit Retry Count" ] && (
       <th>
         <div>
           <small>Exit Retry Count</small>
@@ -1737,7 +1737,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Exit Retry Wait Seconds": stColVis["Exit Retry Wait Seconds"] && (
+    "Exit Retry Wait Seconds": stColVis[ "Exit Retry Wait Seconds" ] && (
       <th>
         <div>
           <small>
@@ -1754,7 +1754,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Exit Max Wait Seconds": stColVis["Exit Max Wait Seconds"] && (
+    "Exit Max Wait Seconds": stColVis[ "Exit Max Wait Seconds" ] && (
       <th>
         <div>
           <small>
@@ -1772,7 +1772,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    "Sq Off Done": stColVis["Sq Off Done"] && (
+    "Sq Off Done": stColVis[ "Sq Off Done" ] && (
       <th>
         <div>
           <small>Sq Off Done</small>
@@ -1788,7 +1788,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    Delta: stColVis["Delta"] && (
+    Delta: stColVis[ "Delta" ] && (
       <th>
         <div>
           <small>Delta</small>
@@ -1804,7 +1804,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    Theta: stColVis["Theta"] && (
+    Theta: stColVis[ "Theta" ] && (
       <th>
         <div>
           <small>Theta</small>
@@ -1820,7 +1820,7 @@ function Strategies() {
         </div>
       </th>
     ),
-    Vega: stColVis["Vega"] && (
+    Vega: stColVis[ "Vega" ] && (
       <th>
         <div>
           <small>Vega</small>
@@ -1838,17 +1838,17 @@ function Strategies() {
     ),
   };
 
-  const [userIDSelected, setuserIDSelected] = useState([]);
-  const [aliasSelected, setaliasSelected] = useState([]);
-  const [brokerSelected, setBrokerSelected] = useState([]);
-  const [marginSelected, setmarginSelected] = useState([]);
+  const [ userIDSelected, setuserIDSelected ] = useState([]);
+  const [ aliasSelected, setaliasSelected ] = useState([]);
+  const [ brokerSelected, setBrokerSelected ] = useState([]);
+  const [ marginSelected, setmarginSelected ] = useState([]);
 
   const handleUserIDSelected = (userid) => {
     setuserIDSelected((prevSelectedValues) => {
       if (prevSelectedValues.includes(userid)) {
         return prevSelectedValues.filter((item) => item !== userid);
       } else {
-        return [...prevSelectedValues, userid];
+        return [ ...prevSelectedValues, userid ];
       }
     });
   };
@@ -1857,7 +1857,7 @@ function Strategies() {
       if (prevSelectedValues.includes(alias)) {
         return prevSelectedValues.filter((item) => item !== alias);
       } else {
-        return [...prevSelectedValues, alias];
+        return [ ...prevSelectedValues, alias ];
       }
     });
   };
@@ -1867,7 +1867,7 @@ function Strategies() {
       if (prevSelectedValues.includes(broker)) {
         return prevSelectedValues.filter((item) => item !== broker);
       } else {
-        return [...prevSelectedValues, broker];
+        return [ ...prevSelectedValues, broker ];
       }
     });
   };
@@ -1876,13 +1876,13 @@ function Strategies() {
       if (prevSelectedValues.includes(margin)) {
         return prevSelectedValues.filter((item) => item !== margin);
       } else {
-        return [...prevSelectedValues, margin];
+        return [ ...prevSelectedValues, margin ];
       }
     });
   };
   useEffect(() => {
     setfilteredDataNew(dataNew);
-  }, [dataNew]);
+  }, [ dataNew ]);
 
   useEffect(() => {
     // update rows
@@ -1916,7 +1916,7 @@ function Strategies() {
         }),
       );
     }
-  }, [userIDSelected, aliasSelected, brokerSelected, marginSelected]);
+  }, [ userIDSelected, aliasSelected, brokerSelected, marginSelected ]);
 
   return (
     <div onClick={handleCloseAllSearchBox}>
@@ -1950,7 +1950,7 @@ function Strategies() {
                 {strategiesSeq.map((colName, index) => {
                   return (
                     <React.Fragment key={index}>
-                      {strategiesTH[colName]}
+                      {strategiesTH[ colName ]}
                     </React.Fragment>
                   );
                 })}
@@ -1976,20 +1976,20 @@ function Strategies() {
                           const key = keyName.replace(/\s/g, "");
                           if (
                             key === "UniqueIDReqforOrder"
-                              ? stColVis["Unique ID Req for Order"]
+                              ? stColVis[ "Unique ID Req for Order" ]
                               : stColVis[
-                                  key
-                                    .replace(/\s/g, "")
-                                    .replace(/([A-Z])/g, " $1")
-                                    .slice(1)
-                                ]
+                              key
+                                .replace(/\s/g, "")
+                                .replace(/([A-Z])/g, " $1")
+                                .slice(1)
+                              ]
                           ) {
                             return (
                               <td
                                 key={key}
                                 className={
                                   key === "StrategyLabel" &&
-                                  clearedCells.includes(index)
+                                    clearedCells.includes(index)
                                     ? "cleared-cell"
                                     : ""
                                 }
@@ -2014,7 +2014,7 @@ function Strategies() {
                                       overflowY: "auto", // Enable smooth scrolling on iOS devices
                                     }}
                                   >
-                                    {row[key]}
+                                    {row[ key ]}
                                   </span>
                                 ) : key === "StrategyLabel" ? (
                                   <input
@@ -2023,7 +2023,7 @@ function Strategies() {
                                       textAlign: "center",
                                     }}
                                     type="text"
-                                    value={row[key]}
+                                    value={row[ key ]}
                                     onChange={(e) =>
                                       handleInputChange(
                                         index,
@@ -2043,10 +2043,10 @@ function Strategies() {
                                   >
                                     <div className="tooltip-container">
                                       {actionFilter === "all" ||
-                                      (actionFilter === "checked" &&
-                                        row.Action.enabled) ||
-                                      (actionFilter === "unchecked" &&
-                                        !row.Action.enabled) ? (
+                                        (actionFilter === "checked" &&
+                                          row.Action.enabled) ||
+                                        (actionFilter === "unchecked" &&
+                                          !row.Action.enabled) ? (
                                         <>
                                           {row.Action.enabled ? (
                                             <img
@@ -2165,8 +2165,8 @@ function Strategies() {
                                     }}
                                     onClick={() =>
                                       handleManualSquareOff(
-                                        row["StrategyLabel"],
-                                        row["TradingAccount"],
+                                        row[ "StrategyLabel" ],
+                                        row[ "TradingAccount" ],
                                       )
                                     }
                                   />
@@ -2181,7 +2181,7 @@ function Strategies() {
                                 ) : (
                                   <input
                                     type="text"
-                                    value={row[key]}
+                                    value={row[ key ]}
                                     onChange={(e) =>
                                       handleInputChange(
                                         index,
@@ -2350,7 +2350,7 @@ function Strategies() {
                                 <div className="dropdown-menu">
                                   {Array.from(
                                     new Set(
-                                      dataNew.map((data) => data["UserID"]),
+                                      dataNew.map((data) => data[ "UserID" ]),
                                     ),
                                   ).map((userid, index) => {
                                     return (
@@ -2407,12 +2407,12 @@ function Strategies() {
                                     new Set(
                                       dataNew.map((data) => {
                                         if (userIDSelected.length === 0) {
-                                          return data["Alias"];
+                                          return data[ "Alias" ];
                                         } else {
                                           if (
                                             userIDSelected.includes(data.UserID)
                                           ) {
-                                            return data["Alias"];
+                                            return data[ "Alias" ];
                                           }
                                         }
                                       }),
@@ -2486,12 +2486,12 @@ function Strategies() {
                                     new Set(
                                       dataNew.map((data) => {
                                         if (userIDSelected.length === 0) {
-                                          return data["Broker"];
+                                          return data[ "Broker" ];
                                         } else {
                                           if (
                                             userIDSelected.includes(data.UserID)
                                           ) {
-                                            return data["Broker"];
+                                            return data[ "Broker" ];
                                           }
                                         }
                                       }),
@@ -2552,7 +2552,7 @@ function Strategies() {
                                 <div className="dropdown-menu">
                                   {Array.from(
                                     new Set(
-                                      dataNew.map((data) => data["Margin"]),
+                                      dataNew.map((data) => data[ "Margin" ]),
                                     ),
                                   ).map((margin, index) => {
                                     return (
@@ -2663,31 +2663,31 @@ function Strategies() {
                   }}
                 >
                   <button
-                          disabled={
-                            !isPopUpDataChanged || !isAtLeastOneItemSelected()
-                          }
-                          style={
-                            isPopUpDataChanged && isAtLeastOneItemSelected()
-                              ? {
-                                  backgroundColor: "#0BDA51",
-                                  color: "white",
-                                  padding: "10px",
-                                  borderRadius: "10px",
-                                  cursor: "pointer",
-                                  width: "75px",
-                                  overflowX: "hidden",
-                                }
-                              : {
-                                  padding: "10px",
-                                  borderRadius: "10px",
-                                  cursor: "default",
-                                  width: "75px",
-                                }
-                          }
-                          onClick={handleConfirm}
-                        >
-                          Confirm
-                        </button>
+                    disabled={
+                      !isPopUpDataChanged || !isAtLeastOneItemSelected()
+                    }
+                    style={
+                      isPopUpDataChanged && isAtLeastOneItemSelected()
+                        ? {
+                          backgroundColor: "#0BDA51",
+                          color: "white",
+                          padding: "10px",
+                          borderRadius: "10px",
+                          cursor: "pointer",
+                          width: "75px",
+                          overflowX: "hidden",
+                        }
+                        : {
+                          padding: "10px",
+                          borderRadius: "10px",
+                          cursor: "default",
+                          width: "75px",
+                        }
+                    }
+                    onClick={handleConfirm}
+                  >
+                    Confirm
+                  </button>
                   <button
                     onClick={handleCloseModal}
                     style={{

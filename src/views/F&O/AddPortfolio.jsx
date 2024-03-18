@@ -20,10 +20,10 @@ function AddPortfolio() {
     "Friday",
     "Saturday",
   ];
-  const [selectedWeekdays, setSelectedWeekdays] = useState([]);
-  const [selectAllChecked, setSelectAllChecked] = useState(false);
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [ selectedWeekdays, setSelectedWeekdays ] = useState([]);
+  const [ selectAllChecked, setSelectAllChecked ] = useState(false);
+  const [ dropdownVisible, setDropdownVisible ] = useState(false);
+  const [ isDropdownOpen, setIsDropdownOpen ] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -38,17 +38,17 @@ function AddPortfolio() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, [ dropdownRef ]);
   useEffect(() => {
     // Check if all weekdays are selected
     const allWeekdaysSelected = selectedWeekdays.length === weekdays.length;
     setSelectAllChecked(allWeekdaysSelected);
-  }, [selectedWeekdays, weekdays]);
+  }, [ selectedWeekdays, weekdays ]);
 
   const toggleWeekday = (weekday) => {
     const updatedSelectedWeekdays = selectedWeekdays.includes(weekday)
       ? selectedWeekdays.filter((day) => day !== weekday)
-      : [...selectedWeekdays, weekday];
+      : [ ...selectedWeekdays, weekday ];
     const sortedSelectedWeekdays = updatedSelectedWeekdays.sort((a, b) => {
       return weekdays.indexOf(a) - weekdays.indexOf(b);
     });
@@ -63,7 +63,7 @@ function AddPortfolio() {
 
   const toggleSelectAll = () => {
     if (!selectAllChecked) {
-      setSelectedWeekdays([...weekdays]);
+      setSelectedWeekdays([ ...weekdays ]);
     } else {
       setSelectedWeekdays([]);
     }
@@ -86,8 +86,8 @@ function AddPortfolio() {
   const params = useParams();
   const FandRowRef = useRef(null);
 
-  const [editPortfolio, seteditPortfolio] = useState(false);
-  const [portfolio, setPortfolio] = useState(() => {
+  const [ editPortfolio, seteditPortfolio ] = useState(false);
+  const [ portfolio, setPortfolio ] = useState(() => {
     // console.log("Params : ", portfolio)
 
     if (params.portfolio) {
@@ -99,7 +99,7 @@ function AddPortfolio() {
     }
   });
   // console.log("params============", JSON.parse(portfolio))
-  const [showModal, setShowModal] = useState(false);
+  const [ showModal, setShowModal ] = useState(false);
 
   const handleSymbolChange = (e) => {
     setIsPortfolioEdited(true);
@@ -108,10 +108,10 @@ function AddPortfolio() {
     setSelectedDate(""); // Reset selected date when stock symbol changes
   };
 
-  const [isExecutionTabActive, setIsExecutionTabActive] = useState(true);
-  const [isTargetTabActive, setisTargetTabActive] = useState(false);
-  const [isStoplossTabActive, setisStoplossTabActive] = useState(false);
-  const [isExitTabActive, setisExitTabActive] = useState(false);
+  const [ isExecutionTabActive, setIsExecutionTabActive ] = useState(true);
+  const [ isTargetTabActive, setisTargetTabActive ] = useState(false);
+  const [ isStoplossTabActive, setisStoplossTabActive ] = useState(false);
+  const [ isExitTabActive, setisExitTabActive ] = useState(false);
   const navigate = useNavigate();
 
   const handleConfirmSave = async () => {
@@ -121,9 +121,9 @@ function AddPortfolio() {
     setShowModal(false);
   };
 
-  const [timerValue1, setTimerValue1] = useState("00:00:00");
-  const [timerValue2, setTimerValue2] = useState("00:00:00");
-  const [timerValue3, setTimerValue3] = useState("00:00:00");
+  const [ timerValue1, setTimerValue1 ] = useState("00:00:00");
+  const [ timerValue2, setTimerValue2 ] = useState("00:00:00");
+  const [ timerValue3, setTimerValue3 ] = useState("00:00:00");
 
   const handleTimerChange = (e, setTimerValue) => {
     const inputTime = e.target.value;
@@ -145,7 +145,7 @@ function AddPortfolio() {
     return formattedTime;
   };
 
-  const [activeTab, setActiveTab] = useState("execution");
+  const [ activeTab, setActiveTab ] = useState("execution");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -154,27 +154,27 @@ function AddPortfolio() {
     setisStoplossTabActive(tab === "stoploss");
     setisExitTabActive(tab === "exit");
   };
-  const handleToggleClick = (page) => {};
-  const [legsEdited, setlegsEdited] = useState(false);
-  const [strategyTags, setStrategyTags] = useState([]);
+  const handleToggleClick = (page) => { };
+  const [ legsEdited, setlegsEdited ] = useState(false);
+  const [ strategyTags, setStrategyTags ] = useState([]);
 
-  const [exchange, setExchange] = useState("");
-  const [stock_symbol, setstock_symbol] = useState("NIFTY");
-  const [selectedDate, setSelectedDate] = React.useState(null);
-  const [variety, setProduct] = useState("");
-  const [selectedStrategy, setSelectedStrategy] = useState("");
-  const [order_type, setEntryOrder] = useState("");
-  const [portfolio_name, setPortfolioName] = useState("");
+  const [ exchange, setExchange ] = useState("");
+  const [ stock_symbol, setstock_symbol ] = useState("NIFTY");
+  const [ selectedDate, setSelectedDate ] = React.useState(null);
+  const [ variety, setProduct ] = useState("");
+  const [ selectedStrategy, setSelectedStrategy ] = useState("");
+  const [ order_type, setEntryOrder ] = useState("");
+  const [ portfolio_name, setPortfolioName ] = useState("");
 
-  const [message, setMessage] = useState("");
+  const [ message, setMessage ] = useState("");
   const mainUser = cookies.get("USERNAME");
-  const [IsPortfolioEdited, setIsPortfolioEdited] = useState(false);
+  const [ IsPortfolioEdited, setIsPortfolioEdited ] = useState(false);
 
   // const experies = useSelector(state => state.expiryReducer);
 
   // console.log("experies", experies)
 
-  const [dateOptions, setdateOptions] = useState([]);
+  const [ dateOptions, setdateOptions ] = useState([]);
   const expiryState = useSelector((state) => state.expiryReducer);
   // console.log("NIFTY, BANKNIFTY, FINNIFTY", NIFTY,"=", BANKNIFTY,"=", FINNIFTY)
   useEffect(() => {
@@ -210,7 +210,7 @@ function AddPortfolio() {
       }
     };
     generateDateOptions();
-  }, [stock_symbol, expiryState]);
+  }, [ stock_symbol, expiryState ]);
 
   // useEffect(() => {
   //   console.log("IsPortfolioEdited", IsPortfolioEdited);
@@ -237,7 +237,7 @@ function AddPortfolio() {
       }
       const responseData = await responsePortfolioData.json();
       // console.log("responseData", responseData)
-      const extractedPortfolio = responseData["Portfolio details"];
+      const extractedPortfolio = responseData[ "Portfolio details" ];
       console.log("extractedPortfolio adddport", extractedPortfolio);
 
       dispatch(
@@ -273,12 +273,12 @@ function AddPortfolio() {
       // console.log("currentLegs.length !== dbLegs.length", currentLegs, "=  ", dbLegs)
       // Compare each object in the arrays
       for (let i = 0; i < currentLegs.length; i++) {
-        const obj1 = currentLegs[i];
-        const obj2 = dbLegs[i];
+        const obj1 = currentLegs[ i ];
+        const obj2 = dbLegs[ i ];
 
         // Check if all properties are the same
         for (let key in obj2) {
-          if (obj1[key] !== obj2[key]) {
+          if (obj1[ key ] !== obj2[ key ]) {
             edited = true;
             setIsPortfolioEdited(true);
           }
@@ -305,7 +305,7 @@ function AddPortfolio() {
         edited = true;
         setIsPortfolioEdited(true);
       }
-      const leg = currentLegs[0];
+      const leg = currentLegs[ 0 ];
       edited =
         leg.transaction_type === "BUY" &&
         leg.option_type === "CE" &&
@@ -338,27 +338,15 @@ function AddPortfolio() {
       setSelectedStrategy(portfolio.strategy);
     }
   }, []);
+
+  const { portfolios } = useSelector(state => state.portfolioReducer)
+
   const handleSavePortfolio = async () => {
     try {
       if (!editPortfolio) {
-        const response = await fetch(`/api/get_portfolio/${mainUser}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(
-            errorData.message || "Something bad happened. Please try again",
-          );
-        }
-
-        const responseData = await response.json();
-        console.log(responseData, "responseDatas");
-        const existingPortfolioNames = responseData["Portfolio details"].map(
-          (portfolio) => portfolio.portfolio_name,
+        const existingPortfolioNames = portfolios.map(
+          (portfolio) => portfolio.portfolio_name.toLowerCase(),
         );
 
         if (existingPortfolioNames.includes(portfolio_name.toLowerCase())) {
@@ -426,7 +414,7 @@ function AddPortfolio() {
           ? `/api/edit_portfolio/${mainUser}/${portfolio_name}`
           : `/api/store_portfolio/${mainUser}`,
       };
-      // console.log("newPortfolioItem", newPortfolioItem);
+      console.log("newPortfolioItem", newPortfolioItem);
       try {
         const response = await fetch(api.endpoint, {
           method: "POST",
@@ -444,7 +432,7 @@ function AddPortfolio() {
           );
         } else {
           setShowModal(true);
-          setMessage(responseData[0].message);
+          setMessage(responseData[ 0 ].message);
         }
       } catch (error) {
         setShowModal(true);
@@ -489,8 +477,8 @@ function AddPortfolio() {
 
     fetchStrategy(cookies.get("USERNAME"));
   }, []);
-  const [selectedSymbol, setSelectedSymbol] = useState("");
-  const [marketData, setMarketData] = useState({
+  const [ selectedSymbol, setSelectedSymbol ] = useState("");
+  const [ marketData, setMarketData ] = useState({
     nifty50: {},
     niftybank: {},
     finnifty: {},
@@ -529,44 +517,44 @@ function AddPortfolio() {
 
             const marketData = {
               sensex: {
-                c: sensexDet["ltp"].toFixed(2),
-                ch: (sensexDet["ltp"] - sensexDet["prev_close_price"]).toFixed(
+                c: sensexDet[ "ltp" ].toFixed(2),
+                ch: (sensexDet[ "ltp" ] - sensexDet[ "prev_close_price" ]).toFixed(
                   2,
                 ),
                 chp: (
-                  ((sensexDet["ltp"] - sensexDet["prev_close_price"]) /
-                    sensexDet["ltp"]) *
+                  ((sensexDet[ "ltp" ] - sensexDet[ "prev_close_price" ]) /
+                    sensexDet[ "ltp" ]) *
                   100
                 ).toFixed(2),
               },
               nifty50: {
-                c: niftyDet["ltp"].toFixed(2),
-                ch: (niftyDet["ltp"] - niftyDet["prev_close_price"]).toFixed(2),
+                c: niftyDet[ "ltp" ].toFixed(2),
+                ch: (niftyDet[ "ltp" ] - niftyDet[ "prev_close_price" ]).toFixed(2),
                 chp: (
-                  ((niftyDet["ltp"] - niftyDet["prev_close_price"]) /
-                    niftyDet["ltp"]) *
+                  ((niftyDet[ "ltp" ] - niftyDet[ "prev_close_price" ]) /
+                    niftyDet[ "ltp" ]) *
                   100
                 ).toFixed(2),
               },
               niftybank: {
-                c: bankniftyDet["ltp"].toFixed(2),
+                c: bankniftyDet[ "ltp" ].toFixed(2),
                 ch: (
-                  bankniftyDet["ltp"] - bankniftyDet["prev_close_price"]
+                  bankniftyDet[ "ltp" ] - bankniftyDet[ "prev_close_price" ]
                 ).toFixed(2),
                 chp: (
-                  ((bankniftyDet["ltp"] - bankniftyDet["prev_close_price"]) /
-                    bankniftyDet["ltp"]) *
+                  ((bankniftyDet[ "ltp" ] - bankniftyDet[ "prev_close_price" ]) /
+                    bankniftyDet[ "ltp" ]) *
                   100
                 ).toFixed(2),
               },
               finnifty: {
-                c: finniftyDet["ltp"].toFixed(2),
+                c: finniftyDet[ "ltp" ].toFixed(2),
                 ch: (
-                  finniftyDet["ltp"] - finniftyDet["prev_close_price"]
+                  finniftyDet[ "ltp" ] - finniftyDet[ "prev_close_price" ]
                 ).toFixed(2),
                 chp: (
-                  ((finniftyDet["ltp"] - finniftyDet["prev_close_price"]) /
-                    finniftyDet["ltp"]) *
+                  ((finniftyDet[ "ltp" ] - finniftyDet[ "prev_close_price" ]) /
+                    finniftyDet[ "ltp" ]) *
                   100
                 ).toFixed(2),
               },
@@ -992,10 +980,10 @@ function AddPortfolio() {
                   onClick={() => {
                     if (
                       message ===
-                        "Duplicate legs detected. Please remove duplicates before saving." ||
+                      "Duplicate legs detected. Please remove duplicates before saving." ||
                       message === "Please enter a name for the Portfolio" ||
                       message ===
-                        "Please enter a unique name for the Portfolio" ||
+                      "Please enter a unique name for the Portfolio" ||
                       message === "Please select an Exchange" ||
                       message === "Please select a Product" ||
                       message === "Please select a Strategy Tag" ||

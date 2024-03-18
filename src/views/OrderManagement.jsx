@@ -15,7 +15,7 @@ function OrderManagement() {
   const dispatch = useDispatch();
   // error console
   const { collapsed } = useSelector((state) => state.collapseReducer);
-  const [msgs, setMsgs] = useState([]);
+  const [ msgs, setMsgs ] = useState([]);
   const handleClearLogs = () => {
     if (msgs.length === 0) return; //guard clause
     setMsgs([]);
@@ -25,7 +25,7 @@ function OrderManagement() {
   const allSeqState = useSelector((state) => state.allSeqReducer);
   const allVisState = useSelector((state) => state.allVisReducer);
 
-  const [orderManagementColVis, setOrderManagementColVis] = useState(
+  const [ orderManagementColVis, setOrderManagementColVis ] = useState(
     allVisState.ordermanagementVis,
   );
   const ordermanagmentCols = [
@@ -71,7 +71,7 @@ function OrderManagement() {
     "Manual Exit",
   ];
 
-  const [ordermanagmentColsSelectedALL, setordermanagmentColsSelectedALL] =
+  const [ ordermanagmentColsSelectedALL, setordermanagmentColsSelectedALL ] =
     useState(false);
   const ordermanagmentColSelectALL = () => {
     setordermanagmentColsSelectedALL((prev) => {
@@ -80,12 +80,12 @@ function OrderManagement() {
     ordermanagmentCols.map((ordermanagmentCol) => {
       setOrderManagementColVis((prev) => ({
         ...prev,
-        [ordermanagmentCol]: ordermanagmentColsSelectedALL,
+        [ ordermanagmentCol ]: ordermanagmentColsSelectedALL,
       }));
     });
   };
 
-  const [ordermanagementSeq, setordermanagementSeq] =
+  const [ ordermanagementSeq, setordermanagementSeq ] =
     useState(ordermanagmentCols);
 
   useEffect(() => {
@@ -94,9 +94,9 @@ function OrderManagement() {
       const colVis = {};
       Object.keys(orderManagementColVis).map((col) => {
         if (allSeqState.ordermanagementSeq.includes(col)) {
-          colVis[col] = true;
+          colVis[ col ] = true;
         } else {
-          colVis[col] = false;
+          colVis[ col ] = false;
         }
       });
       // console.log("{...prev, ...colVis}", {...prev, ...colVis})
@@ -118,7 +118,7 @@ function OrderManagement() {
         setordermanagementSeq([]);
       }
     }
-  }, [orderManagementColVis]);
+  }, [ orderManagementColVis ]);
 
   useEffect(() => {
     // console.log("userProfSeq", userProfSeq)
@@ -128,9 +128,9 @@ function OrderManagement() {
         ordermanagementSeq: ordermanagementSeq,
       }),
     );
-  }, [ordermanagementSeq]);
+  }, [ ordermanagementSeq ]);
 
-  const [orderBook, setOrderBook] = useState([
+  const [ orderBook, setOrderBook ] = useState([
     {
       ch: "",
       chp: "",
@@ -209,10 +209,10 @@ function OrderManagement() {
         },
       ]);
     }
-  }, [orderBook]);
+  }, [ orderBook ]);
   // order managment table
   const orderManagementTH = {
-    Action: orderManagementColVis["Action"] && (
+    Action: orderManagementColVis[ "Action" ] && (
       <th key="action">
         <div>
           <small>Action</small>
@@ -228,7 +228,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "User ID": orderManagementColVis["User ID"] && (
+    "User ID": orderManagementColVis[ "User ID" ] && (
       <th key="userId">
         <div>
           <small>User ID</small>
@@ -244,7 +244,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Source Symbol": orderManagementColVis["Source Symbol"] && (
+    "Source Symbol": orderManagementColVis[ "Source Symbol" ] && (
       <th key="sourceSymbol">
         <div>
           <small>Source Symbol</small>
@@ -260,7 +260,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Request ID": orderManagementColVis["Request ID"] && (
+    "Request ID": orderManagementColVis[ "Request ID" ] && (
       <th key="requestId">
         <div>
           <small>Request ID</small>
@@ -276,7 +276,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    Exchange: orderManagementColVis["Exchange"] && (
+    Exchange: orderManagementColVis[ "Exchange" ] && (
       <th key="exchange">
         <div>
           <small>Exchange</small>
@@ -292,7 +292,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Exchange Symbol": orderManagementColVis["Exchange Symbol"] && (
+    "Exchange Symbol": orderManagementColVis[ "Exchange Symbol" ] && (
       <th key="exchangeSymbol">
         <div>
           <small>Exchange Symbol</small>
@@ -308,7 +308,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    LTP: orderManagementColVis["LTP"] && (
+    LTP: orderManagementColVis[ "LTP" ] && (
       <th key="ltp">
         <div>
           <small>LTP</small>
@@ -324,7 +324,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "P&L": orderManagementColVis["P&L"] && (
+    "P&L": orderManagementColVis[ "P&L" ] && (
       <th key="pnl">
         <div>
           <small>P&L</small>
@@ -340,7 +340,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    Product: orderManagementColVis["Product"] && (
+    Product: orderManagementColVis[ "Product" ] && (
       <th key="product">
         <div>
           <small>Product</small>
@@ -355,7 +355,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Entry Order Type": orderManagementColVis["Entry Order Type"] && (
+    "Entry Order Type": orderManagementColVis[ "Entry Order Type" ] && (
       <th key="entryOrderType">
         <div>
           <small>Entry Order Type</small>
@@ -371,7 +371,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Entry Order ID": orderManagementColVis["Entry Order ID"] && (
+    "Entry Order ID": orderManagementColVis[ "Entry Order ID" ] && (
       <th key="entryOrderId">
         <div>
           <small>Entry Order ID</small>
@@ -386,7 +386,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Entry Time": orderManagementColVis["Entry Time"] && (
+    "Entry Time": orderManagementColVis[ "Entry Time" ] && (
       <th key="entryTime">
         <div>
           <small>Entry Time</small>
@@ -402,7 +402,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Entry Txn": orderManagementColVis["Entry Txn"] && (
+    "Entry Txn": orderManagementColVis[ "Entry Txn" ] && (
       <th key="entryTxn">
         <div>
           <small>Entry Txn</small>
@@ -418,7 +418,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Entry Qty": orderManagementColVis["Entry Qty"] && (
+    "Entry Qty": orderManagementColVis[ "Entry Qty" ] && (
       <th key="entryQty">
         <div>
           <small>Entry Qty</small>
@@ -434,7 +434,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Entry Filled Qty": orderManagementColVis["Entry Filled Qty"] && (
+    "Entry Filled Qty": orderManagementColVis[ "Entry Filled Qty" ] && (
       <th key="entryFilledQty">
         <div>
           <small>Entry Filled Qty</small>
@@ -450,7 +450,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Entry Exchange Time": orderManagementColVis["Entry Exchange Time"] && (
+    "Entry Exchange Time": orderManagementColVis[ "Entry Exchange Time" ] && (
       <th key="entryExchangeTime">
         <div>
           <small>Entry Exchange Time</small>
@@ -465,7 +465,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "LTP#1": orderManagementColVis["LTP#1"] && (
+    "LTP#1": orderManagementColVis[ "LTP#1" ] && (
       <th key="ltp1">
         <div>
           <small>LTP#1</small>
@@ -481,7 +481,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "LTP#2": orderManagementColVis["LTP#2"] && (
+    "LTP#2": orderManagementColVis[ "LTP#2" ] && (
       <th key="ltp2">
         <div>
           <small>LTP#2</small>
@@ -496,7 +496,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Entry Avg Price": orderManagementColVis["Entry Avg Price"] && (
+    "Entry Avg Price": orderManagementColVis[ "Entry Avg Price" ] && (
       <th key="entryAvgPrice">
         <div>
           <small>Entry Avg Price</small>
@@ -511,7 +511,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "LTP#3": orderManagementColVis["LTP#3"] && (
+    "LTP#3": orderManagementColVis[ "LTP#3" ] && (
       <th key="ltp3">
         <div>
           <small>LTP#3</small>
@@ -526,7 +526,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Entry Status": orderManagementColVis["Entry Status"] && (
+    "Entry Status": orderManagementColVis[ "Entry Status" ] && (
       <th key="entryStatus">
         <div>
           <small> Entry Status</small>
@@ -541,7 +541,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Exit Order ID": orderManagementColVis["Exit Order ID"] && (
+    "Exit Order ID": orderManagementColVis[ "Exit Order ID" ] && (
       <th key="exitOrderID">
         <div>
           <small>Exit Order ID</small>
@@ -557,7 +557,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Exit Time": orderManagementColVis["Exit Time"] && (
+    "Exit Time": orderManagementColVis[ "Exit Time" ] && (
       <th key="exitTime">
         <div>
           <small>Exit Time</small>
@@ -573,7 +573,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Exit Txn": orderManagementColVis["Exit Txn"] && (
+    "Exit Txn": orderManagementColVis[ "Exit Txn" ] && (
       <th key="exitTxn">
         <div>
           <small>Exit Txn</small>
@@ -589,7 +589,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Exit Qty": orderManagementColVis["Exit Qty"] && (
+    "Exit Qty": orderManagementColVis[ "Exit Qty" ] && (
       <th key="exitQty">
         <div>
           <small>Exit Qty</small>
@@ -605,7 +605,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Exit Filled Qty": orderManagementColVis["Exit Filled Qty"] && (
+    "Exit Filled Qty": orderManagementColVis[ "Exit Filled Qty" ] && (
       <th key="exitFilledQty">
         <div>
           <small>Exit Filled Qty</small>
@@ -621,7 +621,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "LTP#4": orderManagementColVis["LTP#4"] && (
+    "LTP#4": orderManagementColVis[ "LTP#4" ] && (
       <th key="ltp4">
         <div>
           <small>LTP#4</small>
@@ -637,7 +637,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Exit Exchange Time": orderManagementColVis["Exit Exchange Time"] && (
+    "Exit Exchange Time": orderManagementColVis[ "Exit Exchange Time" ] && (
       <th key="exitExchangeTime">
         <div>
           <small>Exit Exchange Time</small>
@@ -653,7 +653,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Exit Avg Price": orderManagementColVis["Exit Avg Price"] && (
+    "Exit Avg Price": orderManagementColVis[ "Exit Avg Price" ] && (
       <th key="exitAvgPrice">
         <div>
           <small>Exit Avg Price</small>
@@ -669,7 +669,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Exit Status": orderManagementColVis["Exit Status"] && (
+    "Exit Status": orderManagementColVis[ "Exit Status" ] && (
       <th key="exitStatus">
         <div>
           <small>Exit Status</small>
@@ -685,7 +685,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    Target: orderManagementColVis["Target"] && (
+    Target: orderManagementColVis[ "Target" ] && (
       <th key="target">
         <div>
           <small>Target</small>
@@ -701,7 +701,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    SL: orderManagementColVis["SL"] && (
+    SL: orderManagementColVis[ "SL" ] && (
       <th key="sl">
         <div>
           <small>SL</small>
@@ -717,7 +717,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Break Even": orderManagementColVis["Break Even"] && (
+    "Break Even": orderManagementColVis[ "Break Even" ] && (
       <th key="breakEven">
         <div>
           <small>Break Even</small>
@@ -733,7 +733,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Signal Source": orderManagementColVis["Signal Source"] && (
+    "Signal Source": orderManagementColVis[ "Signal Source" ] && (
       <th key="signalSource">
         <div>
           <small>Signal Source</small>
@@ -749,7 +749,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    Strategy: orderManagementColVis["Strategy"] && (
+    Strategy: orderManagementColVis[ "Strategy" ] && (
       <th key="strategy">
         <div>
           <small>strategy</small>
@@ -765,7 +765,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Signal Status": orderManagementColVis["Signal Status"] && (
+    "Signal Status": orderManagementColVis[ "Signal Status" ] && (
       <th key="signalStatus">
         <div>
           <small>Signal Status</small>
@@ -781,7 +781,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Order Failed": orderManagementColVis["Order Failed"] && (
+    "Order Failed": orderManagementColVis[ "Order Failed" ] && (
       <th key="orderFailed">
         <div>
           <small>Order Failed</small>
@@ -797,7 +797,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "User Alies": orderManagementColVis["User Alies"] && (
+    "User Alies": orderManagementColVis[ "User Alies" ] && (
       <th key="userAlies">
         <div>
           <small>User Alies</small>
@@ -813,7 +813,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    Remarks: orderManagementColVis["Remarks"] && (
+    Remarks: orderManagementColVis[ "Remarks" ] && (
       <th key="remarks">
         <div>
           <small>Remarks</small>
@@ -829,7 +829,7 @@ function OrderManagement() {
         </div>
       </th>
     ),
-    "Manual Exit": orderManagementColVis["Manual Exit"] && (
+    "Manual Exit": orderManagementColVis[ "Manual Exit" ] && (
       <th key="manualExit">
         <div>
           <small>Manual Exit</small>
@@ -865,7 +865,7 @@ function OrderManagement() {
           <div
             className="main-table"
             style={{ overflow: "auto", height: "92%" }}
-            // ref={tableRef}
+          // ref={tableRef}
           >
             <table className="orderflowtable">
               <thead
@@ -880,7 +880,7 @@ function OrderManagement() {
                   {ordermanagementSeq.map((colName, index) => {
                     return (
                       <React.Fragment key={index}>
-                        {orderManagementTH[colName]}
+                        {orderManagementTH[ colName ]}
                       </React.Fragment>
                     );
                   })}
@@ -889,7 +889,7 @@ function OrderManagement() {
               <tbody className="tabletbody">
                 {orderBook.map((order, index) => {
                   const orderManagementTD = {
-                    Action: orderManagementColVis["Action"] && (
+                    Action: orderManagementColVis[ "Action" ] && (
                       <td key="action">
                         <input
                           type="text"
@@ -897,7 +897,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "User ID": orderManagementColVis["User ID"] && (
+                    "User ID": orderManagementColVis[ "User ID" ] && (
                       <td key="userID">
                         <input
                           value={order.clientId}
@@ -906,7 +906,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Source Symbol": orderManagementColVis["Source Symbol"] && (
+                    "Source Symbol": orderManagementColVis[ "Source Symbol" ] && (
                       <td key="sourceSymbol">
                         <input
                           type="text"
@@ -914,7 +914,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Request ID": orderManagementColVis["Request ID"] && (
+                    "Request ID": orderManagementColVis[ "Request ID" ] && (
                       <td key="requestID">
                         <input
                           type="number"
@@ -922,7 +922,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    Exchange: orderManagementColVis["Exchange"] && (
+                    Exchange: orderManagementColVis[ "Exchange" ] && (
                       <td key="exchange">
                         <input
                           value={
@@ -946,14 +946,14 @@ function OrderManagement() {
                     "Exchange Symbol": orderManagementColVis[
                       "Exchange Symbol"
                     ] && (
-                      <td key="exchangeSymbol">
-                        <input
-                          type="text"
-                          style={{ pointerEvents: "none", padding: "6px" }}
-                        />
-                      </td>
-                    ),
-                    LTP: orderManagementColVis["LTP"] && (
+                        <td key="exchangeSymbol">
+                          <input
+                            type="text"
+                            style={{ pointerEvents: "none", padding: "6px" }}
+                          />
+                        </td>
+                      ),
+                    LTP: orderManagementColVis[ "LTP" ] && (
                       <td key="ltp">
                         <input
                           type="text"
@@ -961,7 +961,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "P&L": orderManagementColVis["P&L"] && (
+                    "P&L": orderManagementColVis[ "P&L" ] && (
                       <td key="pl">
                         <input
                           type="number"
@@ -969,7 +969,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    Product: orderManagementColVis["Product"] && (
+                    Product: orderManagementColVis[ "Product" ] && (
                       <td key="product">
                         <input
                           value={order.productType}
@@ -981,24 +981,24 @@ function OrderManagement() {
                     "Entry Order Type": orderManagementColVis[
                       "Entry Order Type"
                     ] && (
-                      <td key="entryOrderType">
-                        <input
-                          type="text"
-                          style={{ pointerEvents: "none", padding: "6px" }}
-                        />
-                      </td>
-                    ),
+                        <td key="entryOrderType">
+                          <input
+                            type="text"
+                            style={{ pointerEvents: "none", padding: "6px" }}
+                          />
+                        </td>
+                      ),
                     "Entry Order ID": orderManagementColVis[
                       "Entry Order ID"
                     ] && (
-                      <td key="entryOrderID">
-                        <input
-                          type="number"
-                          style={{ pointerEvents: "none", padding: "6px" }}
-                        />
-                      </td>
-                    ),
-                    "Entry Time": orderManagementColVis["Entry Time"] && (
+                        <td key="entryOrderID">
+                          <input
+                            type="number"
+                            style={{ pointerEvents: "none", padding: "6px" }}
+                          />
+                        </td>
+                      ),
+                    "Entry Time": orderManagementColVis[ "Entry Time" ] && (
                       <td key="entryTime">
                         <input
                           type="text"
@@ -1006,7 +1006,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Entry Txn": orderManagementColVis["Entry Txn"] && (
+                    "Entry Txn": orderManagementColVis[ "Entry Txn" ] && (
                       <td key="entryTxn">
                         <input
                           type="text"
@@ -1014,7 +1014,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Entry Qty": orderManagementColVis["Entry Qty"] && (
+                    "Entry Qty": orderManagementColVis[ "Entry Qty" ] && (
                       <td key="entryQty">
                         <input
                           type="number"
@@ -1025,24 +1025,24 @@ function OrderManagement() {
                     "Entry Filled Qty": orderManagementColVis[
                       "Entry Filled Qty"
                     ] && (
-                      <td key="entryFilledQty">
-                        <input
-                          type="number"
-                          style={{ pointerEvents: "none", padding: "6px" }}
-                        />
-                      </td>
-                    ),
+                        <td key="entryFilledQty">
+                          <input
+                            type="number"
+                            style={{ pointerEvents: "none", padding: "6px" }}
+                          />
+                        </td>
+                      ),
                     "Entry Exchange Time": orderManagementColVis[
                       "Entry Exchange Time"
                     ] && (
-                      <td key="entryExchangeTime">
-                        <input
-                          type="text"
-                          style={{ pointerEvents: "none", padding: "6px" }}
-                        />
-                      </td>
-                    ),
-                    "LTP#1": orderManagementColVis["LTP#1"] && (
+                        <td key="entryExchangeTime">
+                          <input
+                            type="text"
+                            style={{ pointerEvents: "none", padding: "6px" }}
+                          />
+                        </td>
+                      ),
+                    "LTP#1": orderManagementColVis[ "LTP#1" ] && (
                       <td key="ltp1">
                         <input
                           type="text"
@@ -1050,7 +1050,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "LTP#2": orderManagementColVis["LTP#2"] && (
+                    "LTP#2": orderManagementColVis[ "LTP#2" ] && (
                       <td key="ltp2">
                         <input
                           type="text"
@@ -1061,14 +1061,14 @@ function OrderManagement() {
                     "Entry Avg Price": orderManagementColVis[
                       "Entry Avg Price"
                     ] && (
-                      <td key="entryAvgPrice">
-                        <input
-                          type="number"
-                          style={{ pointerEvents: "none", padding: "6px" }}
-                        />
-                      </td>
-                    ),
-                    "LTP#3": orderManagementColVis["LTP#3"] && (
+                        <td key="entryAvgPrice">
+                          <input
+                            type="number"
+                            style={{ pointerEvents: "none", padding: "6px" }}
+                          />
+                        </td>
+                      ),
+                    "LTP#3": orderManagementColVis[ "LTP#3" ] && (
                       <td key="ltp3">
                         <input
                           type="text"
@@ -1076,7 +1076,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Entry Status": orderManagementColVis["Entry Status"] && (
+                    "Entry Status": orderManagementColVis[ "Entry Status" ] && (
                       <td key="entryStatus">
                         <input
                           type="text"
@@ -1084,7 +1084,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Exit Order ID": orderManagementColVis["Exit Order ID"] && (
+                    "Exit Order ID": orderManagementColVis[ "Exit Order ID" ] && (
                       <td key="exitOrderID">
                         <input
                           type="number"
@@ -1092,7 +1092,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Exit Time": orderManagementColVis["Exit Time"] && (
+                    "Exit Time": orderManagementColVis[ "Exit Time" ] && (
                       <td key="exitTime">
                         <input
                           type="text"
@@ -1100,7 +1100,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Exit Txn": orderManagementColVis["Exit Txn"] && (
+                    "Exit Txn": orderManagementColVis[ "Exit Txn" ] && (
                       <td key="exitTxn">
                         <input
                           type="text"
@@ -1108,7 +1108,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Exit Qty": orderManagementColVis["Exit Qty"] && (
+                    "Exit Qty": orderManagementColVis[ "Exit Qty" ] && (
                       <td key="exitQty">
                         <input
                           type="number"
@@ -1119,14 +1119,14 @@ function OrderManagement() {
                     "Exit Filled Qty": orderManagementColVis[
                       "Exit Filled Qty"
                     ] && (
-                      <td key="exitFilledQty">
-                        <input
-                          type="number"
-                          style={{ pointerEvents: "none", padding: "6px" }}
-                        />
-                      </td>
-                    ),
-                    "LTP#4": orderManagementColVis["LTP#4"] && (
+                        <td key="exitFilledQty">
+                          <input
+                            type="number"
+                            style={{ pointerEvents: "none", padding: "6px" }}
+                          />
+                        </td>
+                      ),
+                    "LTP#4": orderManagementColVis[ "LTP#4" ] && (
                       <td key="ltp4">
                         <input
                           type="text"
@@ -1137,24 +1137,24 @@ function OrderManagement() {
                     "Exit Exchange Time": orderManagementColVis[
                       "Exit Exchange Time"
                     ] && (
-                      <td key="exitExchangeTime">
-                        <input
-                          type="text"
-                          style={{ pointerEvents: "none", padding: "6px" }}
-                        />
-                      </td>
-                    ),
+                        <td key="exitExchangeTime">
+                          <input
+                            type="text"
+                            style={{ pointerEvents: "none", padding: "6px" }}
+                          />
+                        </td>
+                      ),
                     "Exit Avg Price": orderManagementColVis[
                       "Exit Avg Price"
                     ] && (
-                      <td key="exitAvgPrice">
-                        <input
-                          type="number"
-                          style={{ pointerEvents: "none", padding: "6px" }}
-                        />
-                      </td>
-                    ),
-                    "Exit Status": orderManagementColVis["Exit Status"] && (
+                        <td key="exitAvgPrice">
+                          <input
+                            type="number"
+                            style={{ pointerEvents: "none", padding: "6px" }}
+                          />
+                        </td>
+                      ),
+                    "Exit Status": orderManagementColVis[ "Exit Status" ] && (
                       <td key="exitStatus">
                         <input
                           type="text"
@@ -1162,7 +1162,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    Target: orderManagementColVis["Target"] && (
+                    Target: orderManagementColVis[ "Target" ] && (
                       <td key="target">
                         <input
                           type="number"
@@ -1170,7 +1170,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    SL: orderManagementColVis["SL"] && (
+                    SL: orderManagementColVis[ "SL" ] && (
                       <td key="sl">
                         <input
                           type="text"
@@ -1178,7 +1178,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Break Even": orderManagementColVis["Break Even"] && (
+                    "Break Even": orderManagementColVis[ "Break Even" ] && (
                       <td key="breakEven">
                         <input
                           type="text"
@@ -1186,7 +1186,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Signal Source": orderManagementColVis["Signal Source"] && (
+                    "Signal Source": orderManagementColVis[ "Signal Source" ] && (
                       <td key="signalSource">
                         <input
                           type="text"
@@ -1194,7 +1194,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    Strategy: orderManagementColVis["Strategy"] && (
+                    Strategy: orderManagementColVis[ "Strategy" ] && (
                       <td key="strategy">
                         <input
                           type="text"
@@ -1202,7 +1202,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Signal Status": orderManagementColVis["Signal Status"] && (
+                    "Signal Status": orderManagementColVis[ "Signal Status" ] && (
                       <td key="signalStatus">
                         <input
                           type="text"
@@ -1210,7 +1210,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Order Failed": orderManagementColVis["Order Failed"] && (
+                    "Order Failed": orderManagementColVis[ "Order Failed" ] && (
                       <td key="orderFailed">
                         <input
                           type="text"
@@ -1218,7 +1218,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "User Alies": orderManagementColVis["User Alies"] && (
+                    "User Alies": orderManagementColVis[ "User Alies" ] && (
                       <td key="userAlies">
                         <input
                           type="text"
@@ -1226,7 +1226,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    Remarks: orderManagementColVis["Remarks"] && (
+                    Remarks: orderManagementColVis[ "Remarks" ] && (
                       <td key="remarks">
                         <input
                           type="text"
@@ -1234,7 +1234,7 @@ function OrderManagement() {
                         />
                       </td>
                     ),
-                    "Manual Exit": orderManagementColVis["Manual Exit"] && (
+                    "Manual Exit": orderManagementColVis[ "Manual Exit" ] && (
                       <td key="manualExit">
                         <input
                           type="text"
@@ -1254,7 +1254,7 @@ function OrderManagement() {
                       {ordermanagementSeq.map((colName, index) => {
                         return (
                           <React.Fragment key={index}>
-                            {orderManagementTD[colName]}
+                            {orderManagementTD[ colName ]}
                           </React.Fragment>
                         );
                       })}

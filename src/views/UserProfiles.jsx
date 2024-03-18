@@ -29,11 +29,11 @@ function UserProfiles() {
   const dispatch = useDispatch();
   const consoleMsgsState = useSelector((state) => state.consoleMsgsReducer);
   const { collapsed } = useSelector((state) => state.collapseReducer);
-  const [colFilter, setcolFilter] = useState({
+  const [ colFilter, setcolFilter ] = useState({
     asPerCol: "",
     val: "",
   });
-  const [showSearchProfile, setshowSearchProfile] = useState({
+  const [ showSearchProfile, setshowSearchProfile ] = useState({
     showSearchName: false,
     showSearchId: false,
     showSearchMobile: false,
@@ -55,26 +55,26 @@ function UserProfiles() {
   const errorContainerRef = useRef(null);
 
   const handleMsg = (Msg) => {
-    const lastMsg = consoleMsgsState.consoleMsgs[0];
+    const lastMsg = consoleMsgsState.consoleMsgs[ 0 ];
     if (Msg.logType === "MESSAGE" || Msg.logType === "ERROR") {
       if (lastMsg && lastMsg.msg === Msg.msg && lastMsg.user === Msg.user) {
-        console.log("msg same");
+        // console.log("msg same");
         dispatch(
           setConsoleMsgs({
-            consoleMsgs: [Msg, ...consoleMsgsState.consoleMsgs.slice(1)],
+            consoleMsgs: [ Msg, ...consoleMsgsState.consoleMsgs.slice(1) ],
           }),
         );
       } else {
         dispatch(
           setConsoleMsgs({
-            consoleMsgs: [Msg, ...consoleMsgsState.consoleMsgs],
+            consoleMsgs: [ Msg, ...consoleMsgsState.consoleMsgs ],
           }),
         );
       }
     } else {
       dispatch(
         setConsoleMsgs({
-          consoleMsgs: [Msg, ...consoleMsgsState.consoleMsgs],
+          consoleMsgs: [ Msg, ...consoleMsgsState.consoleMsgs ],
         }),
       );
     }
@@ -111,12 +111,12 @@ function UserProfiles() {
 
         const responseData = await response.json();
 
-        console.log("Success:", responseData);
-        const updatedBrokers = [...rows];
+        // console.log("Success:", responseData);
+        const updatedBrokers = [ ...rows ];
 
         // console.log("rdxIndex", rdxIndex, "rdxValue", rdxValue)
-        updatedBrokers[index] = {
-          ...updatedBrokers[index],
+        updatedBrokers[ index ] = {
+          ...updatedBrokers[ index ],
           apiUserDetails: "",
           availableMargin: 0,
           net: 0,
@@ -135,9 +135,9 @@ function UserProfiles() {
           user: rowData.userId,
         });
       } else {
-        const updatedBrokers = [...rows];
-        updatedBrokers[index] = {
-          ...updatedBrokers[index],
+        const updatedBrokers = [ ...rows ];
+        updatedBrokers[ index ] = {
+          ...updatedBrokers[ index ],
           apiUserDetails: "",
           availableMargin: 0,
           net: 0,
@@ -180,7 +180,7 @@ function UserProfiles() {
         }
 
         // If successful, you might want to handle the response here
-        console.log("Credentials deleted successfully");
+        // console.log("Credentials deleted successfully");
       }
     } catch (error) {
       console.error("Error deleting credentials:", error.message);
@@ -301,15 +301,15 @@ function UserProfiles() {
   };
   // handle select change
   // passsword hide unhide
-  const [showPassword, setShowPassword] = useState(false);
+  const [ showPassword, setShowPassword ] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const [showPasswordapi, setShowPasswordapi] = useState(false);
+  const [ showPasswordapi, setShowPasswordapi ] = useState(false);
   const togglePasswordApiVisibility = () => {
     setShowPasswordapi(!showPasswordapi);
   };
-  const [showPasswordqr, setShowPasswordqr] = useState(false);
+  const [ showPasswordqr, setShowPasswordqr ] = useState(false);
   const togglePasswordQrVisibility = () => {
     setShowPasswordqr(!showPasswordqr);
   };
@@ -329,112 +329,112 @@ function UserProfiles() {
   // );
   // }, [ rows ]);
 
-  const [showSelectBox, setShowSelectBox] = useState(false);
-  const [enabledFilter, setEnabledFilter] = useState("");
+  const [ showSelectBox, setShowSelectBox ] = useState(false);
+  const [ enabledFilter, setEnabledFilter ] = useState("");
 
-  const [selectAll, setSelectAll] = useState(false);
-  const [uniqueDataNames, setuniqueDataNames] = useState([]);
-  const [nameSelected, setNameSelected] = useState([]);
+  const [ selectAll, setSelectAll ] = useState(false);
+  const [ uniqueDataNames, setuniqueDataNames ] = useState([]);
+  const [ nameSelected, setNameSelected ] = useState([]);
 
-  const [selectAllBroker, setSelectAllBroker] = useState(false);
-  const [uniqueDataBroker, setuniqueDataBroker] = useState([]);
-  const [brokerSelected, setBrokerSelected] = useState([]);
+  const [ selectAllBroker, setSelectAllBroker ] = useState(false);
+  const [ uniqueDataBroker, setuniqueDataBroker ] = useState([]);
+  const [ brokerSelected, setBrokerSelected ] = useState([]);
 
-  const [selectAllForId, setSelectAllForId] = useState(false);
-  const [uniqueDatauserId, setuniqueDatauserId] = useState([]);
-  const [userIdSelected, setuserIdSelected] = useState([]);
+  const [ selectAllForId, setSelectAllForId ] = useState(false);
+  const [ uniqueDatauserId, setuniqueDatauserId ] = useState([]);
+  const [ userIdSelected, setuserIdSelected ] = useState([]);
 
-  const [selectAllSqOffTime, setSelectAllSqOffTime] = useState(false);
-  const [uniqueDataSqOffTime, setuniqueDataSqOffTime] = useState([]);
-  const [sqOffTimeSelected, setSqOffTimeSelected] = useState([]);
+  const [ selectAllSqOffTime, setSelectAllSqOffTime ] = useState(false);
+  const [ uniqueDataSqOffTime, setuniqueDataSqOffTime ] = useState([]);
+  const [ sqOffTimeSelected, setSqOffTimeSelected ] = useState([]);
 
-  const [selectAllEmail, setSelectAllEmail] = useState(false);
-  const [uniqueDataEmail, setuniqueDataEmail] = useState([]);
-  const [emailSelected, setEmailSelected] = useState([]);
+  const [ selectAllEmail, setSelectAllEmail ] = useState(false);
+  const [ uniqueDataEmail, setuniqueDataEmail ] = useState([]);
+  const [ emailSelected, setEmailSelected ] = useState([]);
 
-  const [selectAllQtyMultiplier, setSelectAllQtyMultiplier] = useState(false);
-  const [uniqueDataQtyMultiplier, setuniqueDataQtyMultiplier] = useState([]);
-  const [qtyMultiplierSelected, setQtyMultiplierSelected] = useState([]);
-  const [uniqueDataMaxOpenTrades, setuniqueDataMaxOpenTrades] = useState([]);
-  const [selectAllMaxOpenTrades, setSelectAllMaxOpenTrades] = useState(false);
-  const [maxOpenTradesSelected, setMaxOpenTradesSelected] = useState([]);
+  const [ selectAllQtyMultiplier, setSelectAllQtyMultiplier ] = useState(false);
+  const [ uniqueDataQtyMultiplier, setuniqueDataQtyMultiplier ] = useState([]);
+  const [ qtyMultiplierSelected, setQtyMultiplierSelected ] = useState([]);
+  const [ uniqueDataMaxOpenTrades, setuniqueDataMaxOpenTrades ] = useState([]);
+  const [ selectAllMaxOpenTrades, setSelectAllMaxOpenTrades ] = useState(false);
+  const [ maxOpenTradesSelected, setMaxOpenTradesSelected ] = useState([]);
 
-  const [selectAllQtyByExposure, setSelectAllQtyByExposure] = useState(false);
-  const [uniqueDataQtyByExposure, setuniqueDataQtyByExposure] = useState([]);
-  const [qtyByExposureSelected, setQtyByExposureSelected] = useState([]);
+  const [ selectAllQtyByExposure, setSelectAllQtyByExposure ] = useState(false);
+  const [ uniqueDataQtyByExposure, setuniqueDataQtyByExposure ] = useState([]);
+  const [ qtyByExposureSelected, setQtyByExposureSelected ] = useState([]);
 
-  const [selectAllMaxLossPerTrade, setSelectAllMaxLossPerTrade] =
+  const [ selectAllMaxLossPerTrade, setSelectAllMaxLossPerTrade ] =
     useState(false);
-  const [uniqueDataMaxLossPerTrade, setuniqueDataMaxLossPerTrade] = useState(
+  const [ uniqueDataMaxLossPerTrade, setuniqueDataMaxLossPerTrade ] = useState(
     [],
   );
-  const [maxLossPerTradeSelected, setMaxLossPerTradeSelected] = useState([]);
+  const [ maxLossPerTradeSelected, setMaxLossPerTradeSelected ] = useState([]);
 
-  const [selectAllNet, setSelectAllNet] = useState(false);
-  const [uniqueDataNet, setuniqueDataNet] = useState([]);
-  const [netSelected, setNetSelected] = useState([]);
+  const [ selectAllNet, setSelectAllNet ] = useState(false);
+  const [ uniqueDataNet, setuniqueDataNet ] = useState([]);
+  const [ netSelected, setNetSelected ] = useState([]);
 
-  const [selectAllMaxProfit, setSelectAllMaxProfit] = useState(false);
-  const [uniqueDataMaxProfit, setuniqueDataMaxProfit] = useState([]);
+  const [ selectAllMaxProfit, setSelectAllMaxProfit ] = useState(false);
+  const [ uniqueDataMaxProfit, setuniqueDataMaxProfit ] = useState([]);
   // const uniqueDataMaxProfit = [ ...new Set(data.map((d) => d.maxProfit)) ];
-  const [maxProfitSelected, setMaxProfitSelected] = useState([]);
+  const [ maxProfitSelected, setMaxProfitSelected ] = useState([]);
 
-  const [selectAllMaxLoss, setSelectAllMaxLoss] = useState(false);
-  const [uniqueDataMaxLoss, setuniqueDataMaxLoss] = useState([]);
+  const [ selectAllMaxLoss, setSelectAllMaxLoss ] = useState(false);
+  const [ uniqueDataMaxLoss, setuniqueDataMaxLoss ] = useState([]);
   // const uniqueDataMaxLoss = [ ...new Set(data.map((d) => d.maxLoss)) ];
-  const [maxLossSelected, setMaxLossSelected] = useState([]);
+  const [ maxLossSelected, setMaxLossSelected ] = useState([]);
 
-  const [selectAllMobile, setSelectAllMobile] = useState(false);
-  const [uniqueDataMobile, setuniqueDataMobile] = useState([]);
+  const [ selectAllMobile, setSelectAllMobile ] = useState(false);
+  const [ uniqueDataMobile, setuniqueDataMobile ] = useState([]);
   // const uniqueDataMobile = [ ...new Set(data.map((d) => d.mobile)) ];
-  const [mobileSelected, setMobileSelected] = useState([]);
+  const [ mobileSelected, setMobileSelected ] = useState([]);
 
-  const [selectAllMTM, setSelectAllMTM] = useState(false);
-  const [uniqueDataMTM, setuniqueDataMTM] = useState([]);
+  const [ selectAllMTM, setSelectAllMTM ] = useState(false);
+  const [ uniqueDataMTM, setuniqueDataMTM ] = useState([]);
   // const uniqueDataMTM = [ ...new Set(data.map((d) => d.mtmAll)) ];
-  const [mtmSelected, setMTMSelected] = useState([]);
+  const [ mtmSelected, setMTMSelected ] = useState([]);
 
-  const [selectAllAvailableMargin, setSelectAllAvailableMargin] =
+  const [ selectAllAvailableMargin, setSelectAllAvailableMargin ] =
     useState(false);
-  const [uniqueDataAvailableMargin, setuniqueDataAvailableMargin] = useState(
+  const [ uniqueDataAvailableMargin, setuniqueDataAvailableMargin ] = useState(
     [],
   );
   // const uniqueDataAvailableMargin = [
   //   ...new Set(data.map((d) => d.availableMargin)),
   // ];
-  const [availableMarginSelected, setAvailableMarginSelected] = useState([]);
+  const [ availableMarginSelected, setAvailableMarginSelected ] = useState([]);
 
   useEffect(() => {
     const data = rows;
-    setuniqueDataNames(data ? [...new Set(data.map((d) => d.name))] : []);
+    setuniqueDataNames(data ? [ ...new Set(data.map((d) => d.name)) ] : []);
     // setNameSelected(uniqueDataNames.map((name) => name.toLowerCase()));
 
-    setuniqueDatauserId(data ? [...new Set(data.map((d) => d.userId))] : []);
+    setuniqueDatauserId(data ? [ ...new Set(data.map((d) => d.userId)) ] : []);
     // setuserIdSelected(uniqueDatauserId.map((userId) => userId.toLowerCase()));
 
-    setuniqueDataMobile(data ? [...new Set(data.map((d) => d.mobile))] : []);
+    setuniqueDataMobile(data ? [ ...new Set(data.map((d) => d.mobile)) ] : []);
     // setMobileSelected(uniqueDataMobile.map((mobile) => mobile.toString()));
 
     setuniqueDataMaxProfit(
-      data ? [...new Set(data.map((d) => d.maxProfit))] : [],
+      data ? [ ...new Set(data.map((d) => d.maxProfit)) ] : [],
     );
     // setMaxProfitSelected(
     //   uniqueDataMaxProfit.map((maxProfit) => maxProfit.toString())
     // );
 
-    setuniqueDataMaxLoss(data ? [...new Set(data.map((d) => d.maxLoss))] : []);
+    setuniqueDataMaxLoss(data ? [ ...new Set(data.map((d) => d.maxLoss)) ] : []);
     // setMaxLossSelected(
     //   uniqueDataMaxLoss.map((maxLoss) => maxLoss.toString())
     // );
 
-    setuniqueDataMTM(data ? [...new Set(data.map((d) => d.mtmAll))] : []);
+    setuniqueDataMTM(data ? [ ...new Set(data.map((d) => d.mtmAll)) ] : []);
     // setMTMSelected(uniqueDataMTM.map((mtmAll) => mtmAll.toString()));
 
-    setuniqueDataNet(data ? [...new Set(data.map((d) => d.net))] : []);
+    setuniqueDataNet(data ? [ ...new Set(data.map((d) => d.net)) ] : []);
     // setNetSelected(uniqueDataNet.map((net) => net.toString()));
 
     setuniqueDataAvailableMargin(
-      data ? [...new Set(data.map((d) => d.availableMargin))] : [],
+      data ? [ ...new Set(data.map((d) => d.availableMargin)) ] : [],
     );
     // setAvailableMarginSelected(
     //   uniqueDataAvailableMargin.map((availableMargin) =>
@@ -443,14 +443,14 @@ function UserProfiles() {
     // );
 
     setuniqueDataQtyByExposure(
-      data ? [...new Set(data.map((d) => d.qtyByExposure))] : [],
+      data ? [ ...new Set(data.map((d) => d.qtyByExposure)) ] : [],
     );
     // setQtyByExposureSelected(
     //   uniqueDataQtyByExposure.map((qtyByExposure) => qtyByExposure.toString())
     // );
 
     setuniqueDataMaxLossPerTrade(
-      data ? [...new Set(data.map((d) => d.maxLossPerTrade))] : [],
+      data ? [ ...new Set(data.map((d) => d.maxLossPerTrade)) ] : [],
     );
     // setMaxLossPerTradeSelected(
     //   uniqueDataMaxLossPerTrade.map((maxLossPerTrade) =>
@@ -459,32 +459,32 @@ function UserProfiles() {
     // );
 
     setuniqueDataMaxOpenTrades(
-      data ? [...new Set(data.map((d) => d.maxOpenTrades))] : [],
+      data ? [ ...new Set(data.map((d) => d.maxOpenTrades)) ] : [],
     );
     // setMaxOpenTradesSelected(
     //   uniqueDataMaxOpenTrades.map((maxOpenTrades) => maxOpenTrades.toString())
     // );
 
     setuniqueDataQtyMultiplier(
-      data ? [...new Set(data.map((d) => d.qtyMultiplier))] : [],
+      data ? [ ...new Set(data.map((d) => d.qtyMultiplier)) ] : [],
     );
     // setQtyMultiplierSelected(
     //   uniqueDataQtyMultiplier.map((qtyMultiplier) => qtyMultiplier.toString())
     // );
 
-    setuniqueDataEmail(data ? [...new Set(data.map((d) => d.email))] : []);
+    setuniqueDataEmail(data ? [ ...new Set(data.map((d) => d.email)) ] : []);
     // setEmailSelected(uniqueDataEmail.map((email) => email.toLowerCase()));
 
     setuniqueDataSqOffTime(
-      data ? [...new Set(data.map((d) => d.sqOffTime))] : [],
+      data ? [ ...new Set(data.map((d) => d.sqOffTime)) ] : [],
     );
     // setSqOffTimeSelected(
     //   uniqueDataSqOffTime.map((sqOffTime) => sqOffTime.toLowerCase())
     // );
 
-    setuniqueDataBroker(data ? [...new Set(data.map((d) => d.broker))] : []);
+    setuniqueDataBroker(data ? [ ...new Set(data.map((d) => d.broker)) ] : []);
     // setBrokerSelected(uniqueDataBroker.map((broker) => broker));
-  }, [rows]);
+  }, [ rows ]);
 
   const handleCheckboxChange = (name) => {
     const isSelected = nameSelected.includes(name);
@@ -494,7 +494,7 @@ function UserProfiles() {
       );
       setSelectAll(false);
     } else {
-      setNameSelected((prevSelected) => [...prevSelected, name]);
+      setNameSelected((prevSelected) => [ ...prevSelected, name ]);
       setSelectAll(nameSelected.length === uniqueDataNames.length - 1);
     }
   };
@@ -507,7 +507,7 @@ function UserProfiles() {
       );
       setSelectAllBroker(false);
     } else {
-      setBrokerSelected((prevSelected) => [...prevSelected, broker]);
+      setBrokerSelected((prevSelected) => [ ...prevSelected, broker ]);
       setSelectAllBroker(brokerSelected.length === uniqueDataBroker.length - 1);
     }
   };
@@ -542,7 +542,7 @@ function UserProfiles() {
       );
       setSelectAllMobile(false);
     } else {
-      setMobileSelected((prevSelected) => [...prevSelected, mobile]);
+      setMobileSelected((prevSelected) => [ ...prevSelected, mobile ]);
       setSelectAllMobile(mobileSelected.length === uniqueDataMobile.length - 1);
     }
   };
@@ -555,7 +555,7 @@ function UserProfiles() {
       );
       setSelectAllMaxProfit(false);
     } else {
-      setMaxProfitSelected((prevSelected) => [...prevSelected, maxProfit]);
+      setMaxProfitSelected((prevSelected) => [ ...prevSelected, maxProfit ]);
       setSelectAllMaxProfit(
         maxProfitSelected.length === uniqueDataMaxProfit.length - 1,
       );
@@ -570,7 +570,7 @@ function UserProfiles() {
       );
       setSelectAllMaxLoss(false);
     } else {
-      setMaxLossSelected((prevSelected) => [...prevSelected, maxLoss]);
+      setMaxLossSelected((prevSelected) => [ ...prevSelected, maxLoss ]);
       setSelectAllMaxLoss(
         maxLossSelected.length === uniqueDataMaxLoss.length - 1,
       );
@@ -617,7 +617,7 @@ function UserProfiles() {
       );
       setSelectAllMTM(false);
     } else {
-      setMTMSelected((prevSelected) => [...prevSelected, mtmAll]);
+      setMTMSelected((prevSelected) => [ ...prevSelected, mtmAll ]);
       setSelectAllMTM(mtmSelected.length === uniqueDataMTM.length - 1);
     }
   };
@@ -641,7 +641,7 @@ function UserProfiles() {
       );
       setSelectAllNet(false);
     } else {
-      setNetSelected((prevSelected) => [...prevSelected, net]);
+      setNetSelected((prevSelected) => [ ...prevSelected, net ]);
       setSelectAllNet(netSelected.length === uniqueDataNet.length - 1);
     }
   };
@@ -789,7 +789,7 @@ function UserProfiles() {
       );
       setSelectAllEmail(false);
     } else {
-      setEmailSelected((prevSelected) => [...prevSelected, email]);
+      setEmailSelected((prevSelected) => [ ...prevSelected, email ]);
       setSelectAllEmail(emailSelected.length === uniqueDataEmail.length - 1);
     }
   };
@@ -812,7 +812,7 @@ function UserProfiles() {
       );
       setSelectAllSqOffTime(false);
     } else {
-      setSqOffTimeSelected((prevSelected) => [...prevSelected, sqOffTime]);
+      setSqOffTimeSelected((prevSelected) => [ ...prevSelected, sqOffTime ]);
       setSelectAllSqOffTime(
         sqOffTimeSelected.length === uniqueDataSqOffTime.length - 1,
       );
@@ -836,7 +836,7 @@ function UserProfiles() {
       setuserIdSelected(userIdSelected.filter((item) => item !== userId));
       setSelectAllForId(false);
     } else {
-      setuserIdSelected((prevSelected) => [...prevSelected, userId]);
+      setuserIdSelected((prevSelected) => [ ...prevSelected, userId ]);
       setSelectAllForId(userIdSelected.length === uniqueDatauserId.length - 1);
     }
   };
@@ -947,29 +947,29 @@ function UserProfiles() {
     });
     setshowSearchProfile((prev) =>
       Object.fromEntries(
-        Object.entries(prev).map(([key, value]) => [key, false]),
+        Object.entries(prev).map(([ key, value ]) => [ key, false ]),
       ),
     );
   };
 
   // console.log("rows", brokerState)
-  const [errorDisplayed, setErrorDisplayed] = useState(false);
+  const [ errorDisplayed, setErrorDisplayed ] = useState(false);
 
   const handleAddRow = (rowData) => {
-    console.log("Adding a new row...");
-    console.log(rows, "cv");
+    // console.log("Adding a new row...");
+    // console.log(rows, "cv");
 
-    const mandatoryFields = ["userId", "name", "broker", "qrCode", "password"];
+    const mandatoryFields = [ "userId", "name", "broker", "qrCode", "password" ];
     let fieldsWithError = {};
 
     const hasMissingFields = rows.some((row) => {
-      const missingFields = mandatoryFields.filter((field) => !row[field]);
-      missingFields.forEach((field) => (fieldsWithError[field] = true));
+      const missingFields = mandatoryFields.filter((field) => !row[ field ]);
+      missingFields.forEach((field) => (fieldsWithError[ field ] = true));
       return missingFields.length > 0;
     });
 
     if (!hasMissingFields) {
-      console.log("No missing fields. Adding new row...");
+      // console.log("No missing fields. Adding new row...");
 
       setErrorDisplayed(false); // Reset error display status
       const newRow = {
@@ -999,20 +999,20 @@ function UserProfiles() {
         inputDisabled: false,
       };
 
-      const updatedRows = [...rows, newRow];
+      const updatedRows = [ ...rows, newRow ];
       // setRows(updatedRows);
       dispatch(
         setBrokers({
           brokers: updatedRows,
         }),
       );
-      console.log("New row added.");
+      // console.log("New row added.");
     } else {
-      console.log("Missing fields detected. Displaying error message...");
+      // console.log("Missing fields detected. Displaying error message...");
 
       // Display error message for missing fields
       const missingFields = mandatoryFields.filter(
-        (field) => fieldsWithError[field],
+        (field) => fieldsWithError[ field ],
       );
       if (missingFields.length > 0) {
         const errorMsg = `Please enter ${missingFields.join(", ")} before adding a new row.`;
@@ -1036,15 +1036,15 @@ function UserProfiles() {
     }, 100);
 
     return () => clearTimeout(scrollTimeout);
-  }, [rows.length]);
+  }, [ rows.length ]);
 
   const updateRowData = (index, updatedData) => {
     // setRows((prevRows) => {
 
     //   return updatedRows;
     // });
-    const updatedRows = [...rows];
-    updatedRows[index] = { ...updatedRows[index], ...updatedData };
+    const updatedRows = [ ...rows ];
+    updatedRows[ index ] = { ...updatedRows[ index ], ...updatedData };
     dispatch(
       setBrokers({
         brokers: updatedRows,
@@ -1062,10 +1062,10 @@ function UserProfiles() {
       tableRef.current.scrollLeft = 0;
     }
   };
-  const [filteredRows, setFilteredRows] = useState(rows);
+  const [ filteredRows, setFilteredRows ] = useState(rows);
   useEffect(() => {
     setFilteredRows(rows);
-  }, [rows]);
+  }, [ rows ]);
   const updateFilteredRows = ({
     nameSelected,
     userIdSelected,
@@ -1317,7 +1317,7 @@ function UserProfiles() {
     setFilteredRows(prevfilteredRows);
   };
 
-  const [showSecretKey, setShowSecretKey] = useState(false);
+  const [ showSecretKey, setShowSecretKey ] = useState(false);
 
   const allSeqState = useSelector((state) => state.allSeqReducer);
   const allVisState = useSelector((state) => state.allVisReducer);
@@ -1361,9 +1361,9 @@ function UserProfiles() {
     "Utilized Margin",
   ];
 
-  const [userProfColVis, setuserProfColVis] = useState(allVisState.userProfVis);
+  const [ userProfColVis, setuserProfColVis ] = useState(allVisState.userProfVis);
 
-  const [profColsSelectedALL, setprofColsSelectedALL] = useState(false);
+  const [ profColsSelectedALL, setprofColsSelectedALL ] = useState(false);
 
   const profPageColSelectAll = () => {
     // console.log("profPageColSelectAll");
@@ -1371,21 +1371,21 @@ function UserProfiles() {
     userProfPageCols.map((userSettingCol) => {
       setuserProfColVis((prev) => ({
         ...prev,
-        [userSettingCol]: profColsSelectedALL,
+        [ userSettingCol ]: profColsSelectedALL,
       }));
     });
   };
 
-  const [userProfSeq, setuserProfSeq] = useState(allSeqState.userProfSeq);
+  const [ userProfSeq, setuserProfSeq ] = useState(allSeqState.userProfSeq);
   useEffect(() => {
     setuserProfSeq(allSeqState.userProfSeq);
     setuserProfColVis((prev) => {
       const colVis = {};
       Object.keys(userProfColVis).map((col) => {
         if (allSeqState.userProfSeq.includes(col)) {
-          colVis[col] = true;
+          colVis[ col ] = true;
         } else {
-          colVis[col] = false;
+          colVis[ col ] = false;
         }
       });
       // console.log("{...prev, ...colVis}", {...prev, ...colVis})
@@ -1408,7 +1408,7 @@ function UserProfiles() {
         setuserProfSeq([]);
       }
     }
-  }, [userProfColVis]);
+  }, [ userProfColVis ]);
 
   useEffect(() => {
     // console.log("userProfSeq", userProfSeq)
@@ -1418,22 +1418,22 @@ function UserProfiles() {
         userProfSeq: userProfSeq,
       }),
     );
-  }, [userProfSeq]);
+  }, [ userProfSeq ]);
 
   const handleCloseAllSearchBox = (e) => {
-    const allowedElements = ["th img", ".Filter-popup"];
+    const allowedElements = [ "th img", ".Filter-popup" ];
     if (!allowedElements.some((element) => e.target.closest(element))) {
       // The click was outside of the allowed elements, perform your function here
       setshowSearchProfile((prev) =>
         Object.fromEntries(
-          Object.entries(prev).map(([key, value]) => [key, false]),
+          Object.entries(prev).map(([ key, value ]) => [ key, false ]),
         ),
       );
     }
   };
 
   const userProfTH = {
-    Action: userProfColVis["Action"] && (
+    Action: userProfColVis[ "Action" ] && (
       <th colSpan="2">
         <div>
           <small>Action</small>
@@ -1474,7 +1474,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "Client Id": userProfColVis["Client Id"] && (
+    "Client Id": userProfColVis[ "Client Id" ] && (
       <th>
         <div>
           <small>Client Id</small>
@@ -1543,7 +1543,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key]) => [key, false]),
+                      Object.entries(prev).map(([ key ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -1556,14 +1556,14 @@ function UserProfiles() {
       </th>
     ),
 
-    "Manual Exit": userProfColVis["Manual Exit"] && (
+    "Manual Exit": userProfColVis[ "Manual Exit" ] && (
       <th>
         <div>
           <small>Manual Exit</small>
         </div>
       </th>
     ),
-    "Mtm (All)": userProfColVis["Mtm (All)"] && (
+    "Mtm (All)": userProfColVis[ "Mtm (All)" ] && (
       <th>
         <div>
           <small>Mtm (All)</small>
@@ -1625,7 +1625,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -1637,7 +1637,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "Available margin": userProfColVis["Available margin"] && (
+    "Available margin": userProfColVis[ "Available margin" ] && (
       <th>
         <div>
           <small>Available margin</small>
@@ -1707,7 +1707,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -1719,7 +1719,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "Display Name": userProfColVis["Display Name"] && (
+    "Display Name": userProfColVis[ "Display Name" ] && (
       <th>
         <div>
           <small>Display Name</small>
@@ -1783,7 +1783,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -1795,7 +1795,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    Broker: userProfColVis["Broker"] && (
+    Broker: userProfColVis[ "Broker" ] && (
       <th>
         <div>
           <small>Broker</small>
@@ -1855,7 +1855,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -1867,7 +1867,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "API Key": userProfColVis["API Key"] && (
+    "API Key": userProfColVis[ "API Key" ] && (
       <th>
         <div>
           <small>API Key</small>
@@ -1883,7 +1883,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "API Secret Key": userProfColVis["API Secret Key"] && (
+    "API Secret Key": userProfColVis[ "API Secret Key" ] && (
       <th>
         <div>
           <small>API Secret Key</small>
@@ -1898,7 +1898,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Data API": userProfColVis["Data API"] && (
+    "Data API": userProfColVis[ "Data API" ] && (
       <th>
         {/* <div>
       <small>Data API</small>
@@ -1919,7 +1919,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "QR code": userProfColVis["QR code"] && (
+    "QR code": userProfColVis[ "QR code" ] && (
       <th>
         <div>
           <small>QR code</small>
@@ -1935,7 +1935,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Exit Time": userProfColVis["Exit Time"] && (
+    "Exit Time": userProfColVis[ "Exit Time" ] && (
       <th>
         <div>
           <small>Exit Time</small>
@@ -2008,7 +2008,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2020,7 +2020,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "Auto Login": userProfColVis["Auto Login"] && (
+    "Auto Login": userProfColVis[ "Auto Login" ] && (
       <th>
         <div>
           <small>Auto Login</small>
@@ -2035,7 +2035,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    Pin: userProfColVis["Pin"] && (
+    Pin: userProfColVis[ "Pin" ] && (
       <th>
         <div>
           <small>Pin</small>
@@ -2051,7 +2051,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Max Profit": userProfColVis["Max Profit"] && (
+    "Max Profit": userProfColVis[ "Max Profit" ] && (
       <th>
         <div>
           <small>Max Profit</small>
@@ -2117,7 +2117,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2129,7 +2129,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "Max Loss": userProfColVis["Max Loss"] && (
+    "Max Loss": userProfColVis[ "Max Loss" ] && (
       <th>
         <div>
           <small>Max Loss</small>
@@ -2196,7 +2196,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2208,7 +2208,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "Profit Locking": userProfColVis["Profit Locking"] && (
+    "Profit Locking": userProfColVis[ "Profit Locking" ] && (
       <th>
         <div>
           <small>Profit Locking</small>
@@ -2224,7 +2224,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Qty By Exposure": userProfColVis["Qty By Exposure"] && (
+    "Qty By Exposure": userProfColVis[ "Qty By Exposure" ] && (
       <th>
         <div>
           <small>Qty By Exposure</small>
@@ -2296,7 +2296,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2311,21 +2311,21 @@ function UserProfiles() {
     "Qty on Max Loss Per Trade": userProfColVis[
       "Qty on Max Loss Per Trade"
     ] && (
-      <th>
-        <div>
-          <small>Qty on Max Loss Per Trade</small>
-          <img
-            src={filterIcon}
-            alt="icon"
-            style={{
-              height: "25px",
-              width: "25px",
-            }}
-          />
-        </div>
-      </th>
-    ),
-    "Max Loss Per Trade": userProfColVis["Max Loss Per Trade"] && (
+        <th>
+          <div>
+            <small>Qty on Max Loss Per Trade</small>
+            <img
+              src={filterIcon}
+              alt="icon"
+              style={{
+                height: "25px",
+                width: "25px",
+              }}
+            />
+          </div>
+        </th>
+      ),
+    "Max Loss Per Trade": userProfColVis[ "Max Loss Per Trade" ] && (
       <th>
         <div>
           <small>Max Loss Per Trade</small>
@@ -2397,7 +2397,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2409,7 +2409,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "Max Open Trades": userProfColVis["Max Open Trades"] && (
+    "Max Open Trades": userProfColVis[ "Max Open Trades" ] && (
       <th>
         <div>
           <small>Max Open Trades</small>
@@ -2481,7 +2481,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2493,7 +2493,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "Qty Multiplier": userProfColVis["Qty Multiplier"] && (
+    "Qty Multiplier": userProfColVis[ "Qty Multiplier" ] && (
       <th>
         <div>
           <small>Qty Multiplier</small>
@@ -2565,7 +2565,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2577,7 +2577,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    Mobile: userProfColVis["Mobile"] && (
+    Mobile: userProfColVis[ "Mobile" ] && (
       <th>
         <div>
           <small>Mobile</small>
@@ -2638,7 +2638,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2650,7 +2650,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    Email: userProfColVis["Email"] && (
+    Email: userProfColVis[ "Email" ] && (
       <th>
         {/* <div>
       <small>Email</small>
@@ -2723,7 +2723,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2735,7 +2735,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    Net: userProfColVis["Net"] && (
+    Net: userProfColVis[ "Net" ] && (
       <th>
         <div>
           <small>Net</small>
@@ -2798,7 +2798,7 @@ function UserProfiles() {
                 onClick={() => {
                   setshowSearchProfile((prev) =>
                     Object.fromEntries(
-                      Object.entries(prev).map(([key, value]) => [key, false]),
+                      Object.entries(prev).map(([ key, value ]) => [ key, false ]),
                     ),
                   );
                 }}
@@ -2810,7 +2810,7 @@ function UserProfiles() {
         )}
       </th>
     ),
-    "Market Orders": userProfColVis["Market Orders"] && (
+    "Market Orders": userProfColVis[ "Market Orders" ] && (
       <th>
         <div>
           <small>Market Orders</small>
@@ -2825,7 +2825,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Enable NRML sqoff": userProfColVis["Enable NRML sqoff"] && (
+    "Enable NRML sqoff": userProfColVis[ "Enable NRML sqoff" ] && (
       <th>
         <div>
           <small>Enable NRML sqoff</small>
@@ -2840,7 +2840,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Enable CNC sqOff": userProfColVis["Enable CNC sqOff"] && (
+    "Enable CNC sqOff": userProfColVis[ "Enable CNC sqOff" ] && (
       <th>
         <div>
           <small>Enable CNC sqOff</small>
@@ -2855,7 +2855,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Exit Order Type": userProfColVis["Exit Order Type"] && (
+    "Exit Order Type": userProfColVis[ "Exit Order Type" ] && (
       <th>
         <div>
           <small>Exit Order Type</small>
@@ -2886,7 +2886,7 @@ function UserProfiles() {
     //     </div>
     //   </th>
     // ),
-    "2FA": userProfColVis["2FA"] && (
+    "2FA": userProfColVis[ "2FA" ] && (
       <th>
         <div>
           <small>2FA</small>
@@ -2902,7 +2902,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Max Loss Wait Sec": userProfColVis["Max Loss Wait Sec"] && (
+    "Max Loss Wait Sec": userProfColVis[ "Max Loss Wait Sec" ] && (
       <th>
         <div>
           <small>Max Loss Wait Sec</small>
@@ -2920,24 +2920,24 @@ function UserProfiles() {
     "Trading Authorization Req": userProfColVis[
       "Trading Authorization Req"
     ] && (
-      <th>
-        <div>
-          <small style={{ paddingTop: "7px" }}>
-            Trading Authorization
-            <br /> Req
-          </small>
-          <img
-            src={filterIcon}
-            alt="icon"
-            style={{
-              height: "25px",
-              width: "25px",
-            }}
-          />
-        </div>
-      </th>
-    ),
-    "Commodity Margin": userProfColVis["Commodity Margin"] && (
+        <th>
+          <div>
+            <small style={{ paddingTop: "7px" }}>
+              Trading Authorization
+              <br /> Req
+            </small>
+            <img
+              src={filterIcon}
+              alt="icon"
+              style={{
+                height: "25px",
+                width: "25px",
+              }}
+            />
+          </div>
+        </th>
+      ),
+    "Commodity Margin": userProfColVis[ "Commodity Margin" ] && (
       <th>
         <div>
           <small>Commodity Margin</small>
@@ -2952,7 +2952,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "API User Details": userProfColVis["API User Details"] && (
+    "API User Details": userProfColVis[ "API User Details" ] && (
       <th>
         <div>
           <small>API User Details</small>
@@ -2967,7 +2967,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Utilized Margin": userProfColVis["Utilized Margin"] && (
+    "Utilized Margin": userProfColVis[ "Utilized Margin" ] && (
       <th>
         <div>
           <small>Utilized Margin</small>
@@ -2982,7 +2982,7 @@ function UserProfiles() {
         </div>
       </th>
     ),
-    "Utilized Margin %": userProfColVis["Utilized Margin %"] && (
+    "Utilized Margin %": userProfColVis[ "Utilized Margin %" ] && (
       <th>
         <div>
           <small>Utilized Margin %</small>
@@ -3028,7 +3028,7 @@ function UserProfiles() {
                 {userProfSeq.map((colName, index) => {
                   return (
                     <React.Fragment key={index}>
-                      {userProfTH[colName]}
+                      {userProfTH[ colName ]}
                     </React.Fragment>
                   );
                 })}
@@ -3036,7 +3036,7 @@ function UserProfiles() {
               <tbody>
                 {filteredRows.map((rowData, index) => {
                   const userProfTD = {
-                    Action: userProfColVis["Action"] && (
+                    Action: userProfColVis[ "Action" ] && (
                       <td
                         style={{ width: "15%", paddingLeft: "15px" }}
                         colSpan="2"
@@ -3103,11 +3103,10 @@ function UserProfiles() {
                             />
                           )}
                           <span
-                            className={`tooltiptext ${
-                              rowData.inputDisabled
-                                ? "login-tooltip"
-                                : "logout-tooltip"
-                            }`}
+                            className={`tooltiptext ${rowData.inputDisabled
+                              ? "login-tooltip"
+                              : "logout-tooltip"
+                              }`}
                           >
                             {rowData.inputDisabled ? "Logout" : "Login"}
                           </span>
@@ -3132,7 +3131,7 @@ function UserProfiles() {
                         </span>
                       </td>
                     ),
-                    "Client Id": userProfColVis["Client Id"] && (
+                    "Client Id": userProfColVis[ "Client Id" ] && (
                       <td>
                         <input
                           type="text"
@@ -3145,7 +3144,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Manual Exit": userProfColVis["Manual Exit"] && (
+                    "Manual Exit": userProfColVis[ "Manual Exit" ] && (
                       <td style={{ textAlign: "center" }}>
                         <img
                           src={Log}
@@ -3158,7 +3157,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Mtm (All)": userProfColVis["Mtm (All)"] && (
+                    "Mtm (All)": userProfColVis[ "Mtm (All)" ] && (
                       <td style={{ textAlign: "right" }}>
                         <input
                           type="number"
@@ -3171,7 +3170,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Available margin": userProfColVis["Available margin"] && (
+                    "Available margin": userProfColVis[ "Available margin" ] && (
                       <td>
                         <input
                           type="number"
@@ -3188,7 +3187,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Display Name": userProfColVis["Display Name"] && (
+                    "Display Name": userProfColVis[ "Display Name" ] && (
                       <td>
                         <input
                           type="text"
@@ -3201,7 +3200,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    Broker: userProfColVis["Broker"] && (
+                    Broker: userProfColVis[ "Broker" ] && (
                       <td>
                         <select
                           onChange={(e) =>
@@ -3224,7 +3223,7 @@ function UserProfiles() {
                         </select>
                       </td>
                     ),
-                    "API Key": userProfColVis["API Key"] && (
+                    "API Key": userProfColVis[ "API Key" ] && (
                       <td>
                         <div style={{ position: "relative" }}>
                           <input
@@ -3251,7 +3250,7 @@ function UserProfiles() {
                         </div>
                       </td>
                     ),
-                    "API Secret Key": userProfColVis["API Secret Key"] && (
+                    "API Secret Key": userProfColVis[ "API Secret Key" ] && (
                       <td>
                         {showSecretKey && (
                           <div style={{ position: "relative" }}>
@@ -3282,7 +3281,7 @@ function UserProfiles() {
                         )}
                       </td>
                     ),
-                    "Data API": userProfColVis["Data API"] && (
+                    "Data API": userProfColVis[ "Data API" ] && (
                       <td style={{ textAlign: "center" }}>
                         <input
                           type="checkbox"
@@ -3297,7 +3296,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "QR code": userProfColVis["QR code"] && (
+                    "QR code": userProfColVis[ "QR code" ] && (
                       <td>
                         <div style={{ position: "relative" }}>
                           <input
@@ -3324,7 +3323,7 @@ function UserProfiles() {
                         </div>
                       </td>
                     ),
-                    "Exit Time": userProfColVis["Exit Time"] && (
+                    "Exit Time": userProfColVis[ "Exit Time" ] && (
                       <td>
                         <input
                           type="text"
@@ -3336,7 +3335,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Auto Login": userProfColVis["Auto Login"] && (
+                    "Auto Login": userProfColVis[ "Auto Login" ] && (
                       <td style={{ textAlign: "center" }}>
                         <input
                           type="checkbox"
@@ -3351,7 +3350,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    Pin: userProfColVis["Pin"] && (
+                    Pin: userProfColVis[ "Pin" ] && (
                       <td>
                         <input
                           type="password"
@@ -3369,7 +3368,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Max Profit": userProfColVis["Max Profit"] && (
+                    "Max Profit": userProfColVis[ "Max Profit" ] && (
                       <td>
                         <input
                           type="number"
@@ -3381,7 +3380,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Max Loss": userProfColVis["Max Loss"] && (
+                    "Max Loss": userProfColVis[ "Max Loss" ] && (
                       <td>
                         <input
                           type="number"
@@ -3393,7 +3392,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Profit Locking": userProfColVis["Profit Locking"] && (
+                    "Profit Locking": userProfColVis[ "Profit Locking" ] && (
                       <td>
                         <input
                           type="number"
@@ -3407,7 +3406,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Qty By Exposure": userProfColVis["Qty By Exposure"] && (
+                    "Qty By Exposure": userProfColVis[ "Qty By Exposure" ] && (
                       <td>
                         <input
                           type="number"
@@ -3424,31 +3423,31 @@ function UserProfiles() {
                     "Qty on Max Loss Per Trade": userProfColVis[
                       "Qty on Max Loss Per Trade"
                     ] && (
-                      <td style={{ textAlign: "center" }}>
-                        <input
-                          type="checkbox"
-                          name="Qty_on_Max_Loss_PerTrade"
-                          style={{ padding: "8px" }}
-                        />
-                      </td>
-                    ),
+                        <td style={{ textAlign: "center" }}>
+                          <input
+                            type="checkbox"
+                            name="Qty_on_Max_Loss_PerTrade"
+                            style={{ padding: "8px" }}
+                          />
+                        </td>
+                      ),
                     "Max Loss Per Trade": userProfColVis[
                       "Max Loss Per Trade"
                     ] && (
-                      <td>
-                        <input
-                          type="number"
-                          value={rowData.maxLossPerTrade}
-                          onChange={(e) =>
-                            updateRowData(index, {
-                              maxLossPerTrade: e.target.value,
-                            })
-                          }
-                          style={{ textAlign: "center", padding: "8px" }}
-                        />
-                      </td>
-                    ),
-                    "Max Open Trades": userProfColVis["Max Open Trades"] && (
+                        <td>
+                          <input
+                            type="number"
+                            value={rowData.maxLossPerTrade}
+                            onChange={(e) =>
+                              updateRowData(index, {
+                                maxLossPerTrade: e.target.value,
+                              })
+                            }
+                            style={{ textAlign: "center", padding: "8px" }}
+                          />
+                        </td>
+                      ),
+                    "Max Open Trades": userProfColVis[ "Max Open Trades" ] && (
                       <td>
                         <input
                           type="number"
@@ -3462,7 +3461,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Qty Multiplier": userProfColVis["Qty Multiplier"] && (
+                    "Qty Multiplier": userProfColVis[ "Qty Multiplier" ] && (
                       <td>
                         <input
                           type="number"
@@ -3476,7 +3475,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    Mobile: userProfColVis["Mobile"] && (
+                    Mobile: userProfColVis[ "Mobile" ] && (
                       <td>
                         <input
                           type="text"
@@ -3487,7 +3486,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    Email: userProfColVis["Email"] && (
+                    Email: userProfColVis[ "Email" ] && (
                       <td>
                         <input
                           type="email"
@@ -3498,7 +3497,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    Net: userProfColVis["Net"] && (
+                    Net: userProfColVis[ "Net" ] && (
                       <td>
                         <input
                           type="number"
@@ -3511,7 +3510,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Market Orders": userProfColVis["Market Orders"] && (
+                    "Market Orders": userProfColVis[ "Market Orders" ] && (
                       <td>
                         <input type="text" />
                       </td>
@@ -3519,16 +3518,16 @@ function UserProfiles() {
                     "Enable NRML sqoff": userProfColVis[
                       "Enable NRML sqoff"
                     ] && (
+                        <td style={{ textAlign: "center" }}>
+                          <input type="checkbox" />
+                        </td>
+                      ),
+                    "Enable CNC sqOff": userProfColVis[ "Enable CNC sqOff" ] && (
                       <td style={{ textAlign: "center" }}>
                         <input type="checkbox" />
                       </td>
                     ),
-                    "Enable CNC sqOff": userProfColVis["Enable CNC sqOff"] && (
-                      <td style={{ textAlign: "center" }}>
-                        <input type="checkbox" />
-                      </td>
-                    ),
-                    "Exit Order Type": userProfColVis["Exit Order Type"] && (
+                    "Exit Order Type": userProfColVis[ "Exit Order Type" ] && (
                       <td>
                         <input type="text" />
                       </td>
@@ -3538,7 +3537,7 @@ function UserProfiles() {
                     //     <input type="text" />
                     //   </td>
                     // ),
-                    "2FA": userProfColVis["2FA"] && (
+                    "2FA": userProfColVis[ "2FA" ] && (
                       <td>
                         <input type="text" />
                       </td>
@@ -3546,23 +3545,23 @@ function UserProfiles() {
                     "Max Loss Wait Sec": userProfColVis[
                       "Max Loss Wait Sec"
                     ] && (
-                      <td>
-                        <input type="text" />
-                      </td>
-                    ),
+                        <td>
+                          <input type="text" />
+                        </td>
+                      ),
                     "Trading Authorization Req": userProfColVis[
                       "Trading Authorization Req"
                     ] && (
-                      <td style={{ textAlign: "center" }}>
-                        <input type="checkbox" />
-                      </td>
-                    ),
-                    "Commodity Margin": userProfColVis["Commodity Margin"] && (
+                        <td style={{ textAlign: "center" }}>
+                          <input type="checkbox" />
+                        </td>
+                      ),
+                    "Commodity Margin": userProfColVis[ "Commodity Margin" ] && (
                       <td>
                         <input type="text" />
                       </td>
                     ),
-                    "API User Details": userProfColVis["API User Details"] && (
+                    "API User Details": userProfColVis[ "API User Details" ] && (
                       <td>
                         <input
                           type="text"
@@ -3575,7 +3574,7 @@ function UserProfiles() {
                         />
                       </td>
                     ),
-                    "Utilized Margin": userProfColVis["Utilized Margin"] && (
+                    "Utilized Margin": userProfColVis[ "Utilized Margin" ] && (
                       <td>
                         <input type="text" />
                       </td>
@@ -3583,17 +3582,17 @@ function UserProfiles() {
                     "Utilized Margin %": userProfColVis[
                       "Utilized Margin %"
                     ] && (
-                      <td>
-                        <input type="text" />
-                      </td>
-                    ),
+                        <td>
+                          <input type="text" />
+                        </td>
+                      ),
                   };
                   return (
                     <tr>
                       {userProfSeq.map((colName, index) => {
                         return (
                           <React.Fragment key={index}>
-                            {userProfTD[colName]}
+                            {userProfTD[ colName ]}
                           </React.Fragment>
                         );
                       })}

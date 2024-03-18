@@ -31,59 +31,6 @@ const Fandorow = forwardRef(
   ) => {
     const tableRef = useRef();
 
-    // const generateDateOptions = (stock_symbol, index) => {
-    //   const today = new Date();
-    //   const options = [];
-    //   let targetWeekday = 0; // Target weekday (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
-    //   options.push(
-    //     <option key="default" value="">
-    //       Select
-    //     </option>,
-    //   );
-
-    //   if (stock_symbol === "NIFTY") {
-    //     targetWeekday = 4; // Thursday for NIFTY
-    //   } else if (stock_symbol === "BANKNIFTY") {
-    //     targetWeekday = 3; // Wednesday for BANKNIFTY
-    //   } else if (stock_symbol === "FINNIFTY") {
-    //     targetWeekday = 2; // Tuesday for FINNIFTY
-    //   } else {
-    //     return options; // Return empty options if stock symbol is not recognized
-    //   }
-
-    //   // Generate options for the next 5 occurrences of the target weekday
-    //   for (let i = 0; options.length < 5; i++) {
-    //     const nextDate = new Date(
-    //       today.getFullYear(),
-    //       today.getMonth(),
-    //       today.getDate() + i,
-    //     );
-    //     if (nextDate.getDay() === targetWeekday) {
-    //       const month = nextDate.toLocaleDateString("en-US", {
-    //         month: "short",
-    //       });
-    //       const year = String(nextDate.getFullYear()).slice(-2);
-    //       const day = nextDate.getDate();
-    //       const formattedDate = `${day}-${month}-${year}`;
-    //       options.push(
-    //         <option
-    //           selected={
-    //             editPortfolio
-    //               ? legs[index]["expiry_date"] === formattedDate
-    //               : selectedDate === formattedDate
-    //                 ? true
-    //                 : false
-    //           }
-    //           key={`${stock_symbol}-${formattedDate}`}
-    //           value={formattedDate}
-    //         >
-    //           {formattedDate}
-    //         </option>,
-    //       );
-    //     }
-    //   }
-    //   return options;
-    // };
 
     const [ dateOptions, setdateOptions ] = useState([]);
     const expiryState = useSelector((state) => state.expiryReducer);
@@ -150,7 +97,7 @@ const Fandorow = forwardRef(
       {
         transaction_type: "BUY",
         option_type: "CE",
-        ltp: "",
+        ltp: "0",
         lots: 1,
         expiry_date: "",
         strike: "",
@@ -169,7 +116,7 @@ const Fandorow = forwardRef(
         {
           transaction_type: "BUY",
           option_type: "CE",
-          ltp: "",
+          ltp: "0",
           lots: 1,
           expiry_date: selectedDate,
           strike: "",
@@ -199,6 +146,7 @@ const Fandorow = forwardRef(
 
     useEffect(() => {
       if (selectedDate !== null) {
+        // console.log("second")
         const updatedLegs = [ ...legs ];
         legs.map((leg) => {
           leg[ "expiry_date" ] = selectedDate;
@@ -215,6 +163,7 @@ const Fandorow = forwardRef(
             ltp: "0",
           };
         });
+        // console.log("updatedLegs1", updatedLegs);
         return updatedLegs;
       });
     }, [ stock_symbol ]);
@@ -245,6 +194,7 @@ const Fandorow = forwardRef(
         return legs;
       },
     }));
+
     useEffect(() => {
       allStrikeValues.map(async (strike, index) => {
         const atmData = {
@@ -253,10 +203,10 @@ const Fandorow = forwardRef(
           option_type: allOptionTypes[ index ],
           expiry: legs[ index ].expiry_date,
         };
-        // console.log("ATM Data:", atmData);
+        console.log("ATM Data:", atmData);
 
         if (
-          atmData.stock_symbol !== "" &&
+          atmData.symbol !== "" &&
           atmData.strike !== "" &&
           atmData.option_type !== "" &&
           atmData.expiry !== ""
@@ -269,15 +219,20 @@ const Fandorow = forwardRef(
               },
               body: JSON.stringify(atmData),
             });
+
+            if (!response.ok) {
+              throw new Error(
+                responseData.message ||
+                "Something bad happened. Please try again",
+              );
+            }
             const responseData = await response.json();
-            console.log(responseData, "responseData")
-
-            const updatedLegs = [ ...legs ];
-            updatedLegs[ index ][ "ltp" ] =
-              `${responseData[ "Strike Price" ]} (${responseData[ "Price" ].toFixed(2)})`;
-            console.log("Updated Legs:", updatedLegs);
-            setlegs(updatedLegs);
-
+            console.log("ltp res", responseData)
+            setlegs(prevLegs => {
+              const updatedLegs = [ ...prevLegs ];
+              updatedLegs[ index ][ "ltp" ] = `${responseData[ "Strike Price" ]} (${responseData[ "Price" ].toFixed(2)})`;
+              return updatedLegs
+            })
             if (!response.ok) {
               throw new Error(
                 responseData.message ||
@@ -287,7 +242,6 @@ const Fandorow = forwardRef(
           } catch (error) {
             console.log(error.message);
           }
-
         }
       });
     }, [ stock_symbol, allStrikeValues, allOptionTypes, allExpiryDates ]);
@@ -395,7 +349,7 @@ const Fandorow = forwardRef(
             <input
               type="text"
               className="number1"
-              value={legs[ index ][ "ltp" ] || 0}
+              value={legs[ index ][ "ltp" ]}
               style={{
                 textAlign: "center",
                 borderRadius: "3px",
